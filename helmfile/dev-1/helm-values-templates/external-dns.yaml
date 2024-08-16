@@ -11,14 +11,14 @@ domainFilters:
 
 txtOwnerId: externaldns
 namespace: external-dns
-logLevel: info
+logLevel: debug
 replicaCount: 1
 resources: {}
 
 sources:
-  - service
-  - ingress
-  - istio-gateway
-  - istio-virtualservice
+- service
+- ingress
+- istio-gateway
+- istio-virtualservice
 
 annotationFilter: "external-dns.alpha.kubernetes.io/hostname"
