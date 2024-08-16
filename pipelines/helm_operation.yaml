@@ -41,18 +41,6 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - script: |
-        helm plugin install https://github.com/databus23/helm-diff
-        sudo apt update
-        sudo apt-get install build-essential
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-        brew install helmfile
-        helmfile --version
-        brew --version
-        helm plugin list
-        helm version
-      displayName: 'Prepare Agent'
     - task: AzureCLI@2
       displayName: 'Helm ${{ parameters.helmOperation }}'
       inputs:
@@ -60,13 +48,31 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          helmfile --version
-          brew --version
-          helm plugin list
-          helm version
+          #####prepare agent for helmfile        
+          helm plugin install https://github.com/databus23/helm-diff
+          sudo apt update
+          sudo apt-get install build-essential -y
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          brew install helmfile
+          envsubst --version
+          #####get kubeconfig
+          az aks get-credentials --resource-group ${{ parameters.aksResourceGroup }} --name ${{ parameters.environment }}-${{ parameters.project }}
+
+          #####prepare helmfile values files
+          input_dir=helm_predeploy/helmfile/${{ parameters.environment }}/helm-values-templates
+          output_dir=helm_predeploy/helmfile/${{ parameters.environment }}/helm-values
+          mkdir $output_dir -p
+          for file in "$input_dir"/*.yaml; do
+            filename=$(basename "$file" .yaml)
+            envsubst < "$file" > "${output_dir}/${filename}-${{ parameters.environment }}.yaml"
+          done
+
+          #####helmfile operation
+          tree .
       env:
-          ARM_CLIENT_ID: $(armClientId)
-          ARM_CLIENT_SECRET: $(armClientSecret)
-          ARM_TENANT_ID: $(armTenantId)
-          ARM_SUBSCRIPTION_ID: $(armSubscriptionId)
-          #az aks get-credentials --resource-group ${{ parameters.aksResourceGroup }} --name ${{ parameters.environment }}-${{ parameters.project }}
+          CLIENT_ID: $(armClientId)
+          CLIENT_SECRET: $(armClientSecret)
+          TENANT_ID: $(armTenantId)
+          SUBSCRIPTION_ID: $(armSubscriptionId)
+          RESOURCE_GROUP: ${{ parameters.project }}
