@@ -12,7 +12,7 @@ releases:
   - ./helm-values/predeploy-dev-1.yaml
 
 - name: external-dns
-  namespace: default
+  namespace: external-dns
   chart: bitnami/external-dns
   version: 8.3.5
   values:

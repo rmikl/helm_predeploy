@@ -4,24 +4,13 @@ azure:
   resourceGroup: "${RESOURCE_GROUP}"
   subscriptionId: "${SUBSCRIPTION_ID}"  
   tenantId: "${TENANT_ID}"
-  secretName: azure-credentials
+  secretName: default/azure-credentials
 
 domainFilters:
   - rmikl.pl
 
 txtOwnerId: externaldns
-namespace: default
+namespace: external-dns
 logLevel: info
 replicaCount: 1
 resources: {}
-
-#extraVolumes:
-#- name: azure-credentials
-#  secret:
-#    secretName: azure-credentials
-#
-#extraVolumeMounts:
-#- name: azure-credentials
-#  mountPath: /etc/kubernetes/azure.json
-#  subPath: azure.json
-#  readOnly: true
