@@ -49,7 +49,7 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          az aks get-credentials --resource-group ${{ parameters.aksResourceGroup }} --name dev-1-rmikl ${{ parameters.environment }}-${{ parameters.project }}
+          az aks get-credentials --resource-group ${{ parameters.aksResourceGroup }} --name ${{ parameters.environment }}-${{ parameters.project }}
           helm list -A 
       env:
           ARM_CLIENT_ID: $(armClientId)
