@@ -16,6 +16,8 @@ replicaCount: 1
 resources: {}
 
 sources:
+  - service
+  - ingress
   - istio-gateway
   - istio-virtualservice
 
