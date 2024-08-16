@@ -16,8 +16,7 @@ replicaCount: 1
 resources: {}
 
 sources:
-  - service
-  - ingress
-  - gateway
+  - istio-gateway
+  - istio-virtualservice
 
 annotationFilter: "external-dns.alpha.kubernetes.io/hostname"
