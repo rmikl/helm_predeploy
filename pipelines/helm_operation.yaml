@@ -1,0 +1,58 @@
+trigger:
+- none
+
+pr:
+- none
+
+parameters:
+- name: azureCredentials
+  type: string
+  default: 'AZURE_SC'
+
+- name: environment
+  type: string
+  default: 'dev-1'
+
+- name: helmOperation
+  type: string
+  default: 'apply'
+  values:
+    - destroy
+    - apply
+
+- name: project
+  type: string
+  default: 'rmikl' 
+
+- name: aksResourceGroup
+  type: string
+  default: 'rmikl-dev-1'
+
+variables:
+  - group: local
+
+
+stages:
+
+- stage: HELM_APPLY
+  displayName: 'Helm ${{ parameters.helmOperation }}'
+  jobs:
+  - job:
+    displayName: 'Helm ${{ parameters.helmOperation }}'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - AzureCLI@2:
+      displayName: 'Helm ${{ parameters.helmOperation }}'
+      inputs:
+        azureSubscription: ${{ parameters.azureCredentials }}
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az aks get-credentials --resource-group ${{ parameters.aksResourceGroup }} --name dev-1-rmikl ${{ parameters.environment }}-${{ parameters.project }}
+          helm list -A 
+      env:
+          ARM_CLIENT_ID: $(armClientId)
+          ARM_CLIENT_SECRET: $(armClientSecret)
+          ARM_TENANT_ID: $(armTenantId)
+          ARM_SUBSCRIPTION_ID: $(armSubscriptionId)
