@@ -42,7 +42,7 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - AzureCLI@2:
+    - task: AzureCLI@2
       displayName: 'Helm ${{ parameters.helmOperation }}'
       inputs:
         azureSubscription: ${{ parameters.azureCredentials }}
