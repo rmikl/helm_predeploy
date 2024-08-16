@@ -34,8 +34,8 @@ variables:
 
 stages:
 
-- stage: HELM_APPLY
-  displayName: 'Helm ${{ parameters.helmOperation }}'
+- stage: HELMFILE_APPLY
+  displayName: 'Helmfile ${{ parameters.helmOperation }}'
   jobs:
   - job:
     displayName: 'Helm ${{ parameters.helmOperation }}'
@@ -49,10 +49,12 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          az aks get-credentials --resource-group ${{ parameters.aksResourceGroup }} --name ${{ parameters.environment }}-${{ parameters.project }}
           helm list -A 
+          helm plugin install https://github.com/databus23/helm-diff
+          brew install helmfile
       env:
           ARM_CLIENT_ID: $(armClientId)
           ARM_CLIENT_SECRET: $(armClientSecret)
           ARM_TENANT_ID: $(armTenantId)
           ARM_SUBSCRIPTION_ID: $(armSubscriptionId)
+          #az aks get-credentials --resource-group ${{ parameters.aksResourceGroup }} --name ${{ parameters.environment }}-${{ parameters.project }}
