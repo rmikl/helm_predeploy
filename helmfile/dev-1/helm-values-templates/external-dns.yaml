@@ -10,30 +10,18 @@ domainFilters:
   - rmikl.pl
 
 txtOwnerId: externaldns
-
 namespace: default
-
-serviceAccount:
-  create: true
-  name: external-dns
-
 logLevel: info
-
-image:
-  repository: registry.k8s.io/external-dns/external-dns
-  tag: v0.14.2
-
 replicaCount: 1
-
 resources: {}
 
-extraVolumes:
-- name: azure-credentials
-  secret:
-    secretName: azure-credentials
-
-extraVolumeMounts:
-- name: azure-credentials
-  mountPath: /etc/kubernetes/azure.json
-  subPath: azure.json
-  readOnly: true
+#extraVolumes:
+#- name: azure-credentials
+#  secret:
+#    secretName: azure-credentials
+#
+#extraVolumeMounts:
+#- name: azure-credentials
+#  mountPath: /etc/kubernetes/azure.json
+#  subPath: azure.json
+#  readOnly: true
