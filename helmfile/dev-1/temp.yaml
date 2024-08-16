@@ -9,11 +9,11 @@ releases:
   chart: ../../predeploy_chart
   version: 0.1.0
   values:
-  - ./helm-values-templates/predeploy-dev-1.yaml
+  - ./helm-values/predeploy-dev-1.yaml
 
 - name: external-dns
   namespace: default
   chart: bitnami/external-dns
   version: 8.3.5
   values:
-  - ./helm-values-templates/external-dns-dev-1.yaml  
+  - ./helm-values/external-dns-dev-1.yaml  

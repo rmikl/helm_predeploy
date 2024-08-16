@@ -2,5 +2,5 @@ azure:
   tenantId: "${TENANT_ID}"
   subscriptionId: "${SUBSCRIPTION_ID}"
   resourceGroup: "${RESOURCE_GROUP}"
-  aadClientId: "${AAD_CLIENT_ID}"
-  aadClientSecret: "${AAD_CLIENT_SECRET}"
+  aadClientId: "${CLIENT_ID}"
+  aadClientSecret: "${CLIENT_SECRET}"

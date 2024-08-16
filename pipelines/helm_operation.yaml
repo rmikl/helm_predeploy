@@ -55,7 +55,7 @@ stages:
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
           brew install helmfile
-          envsubst --version
+          
           #####get kubeconfig
           az aks get-credentials --resource-group ${{ parameters.aksResourceGroup }} --name ${{ parameters.environment }}-${{ parameters.project }}
 
@@ -69,7 +69,8 @@ stages:
           done
 
           #####helmfile operation
-          tree .
+          cd helmfile
+          helmfile apply -f temp.yaml
       env:
           CLIENT_ID: $(armClientId)
           CLIENT_SECRET: $(armClientSecret)
