@@ -6,14 +6,17 @@ pr:
 
 parameters:
 - name: azureCredentials
+  displayName: 'Azure Service Connection'
   type: string
   default: 'AZURE_SC'
 
 - name: environment
+  displayname: 'Environment'
   type: string
   default: 'dev-1'
 
 - name: helmOperation
+  displayname: 'Helm Operation'
   type: string
   default: 'apply'
   values:
@@ -21,10 +24,12 @@ parameters:
     - apply
 
 - name: project
+  displayname: 'Project Name'
   type: string
   default: 'rmikl' 
 
 - name: aksResourceGroup
+  displayname: 'AKS Resource Group'
   type: string
   default: 'rmikl-dev-1'
 
@@ -33,7 +38,6 @@ variables:
 
 
 stages:
-
 - stage: HELMFILE_APPLY
   displayName: 'Helmfile ${{ parameters.helmOperation }}'
   jobs:
@@ -42,6 +46,18 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
+    - script: |
+        helm plugin install https://github.com/databus23/helm-diff
+        sudo apt update
+        sudo apt-get install build-essential
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+        brew install helmfile
+        helmfile --version
+        brew --version
+        helm plugin list
+        helm version
+      displayName: 'Prepare Agent'
     - task: AzureCLI@2
       displayName: 'Helm ${{ parameters.helmOperation }}'
       inputs:
@@ -49,9 +65,10 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          helm list -A 
-          helm plugin install https://github.com/databus23/helm-diff
-          brew install helmfile
+          helmfile --version
+          brew --version
+          helm plugin list
+          helm version
       env:
           ARM_CLIENT_ID: $(armClientId)
           ARM_CLIENT_SECRET: $(armClientSecret)
