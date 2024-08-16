@@ -18,5 +18,6 @@ resources: {}
 sources:
   - service
   - ingress
+  - gateway
 
 annotationFilter: "external-dns.alpha.kubernetes.io/hostname"
