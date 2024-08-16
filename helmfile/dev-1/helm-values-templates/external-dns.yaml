@@ -4,7 +4,7 @@ azure:
   resourceGroup: "${RESOURCE_GROUP}"
   subscriptionId: "${SUBSCRIPTION_ID}"  
   tenantId: "${TENANT_ID}"
-  secretName: default/azure-credentials
+  secretName: azure-credentials
 
 domainFilters:
   - rmikl.pl
