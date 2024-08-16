@@ -69,7 +69,7 @@ stages:
           done
 
           #####helmfile operation
-          cd helmfile
+          cd helmfile/${{ parameters.environment }}
           helmfile apply -f temp.yaml
       env:
           CLIENT_ID: $(armClientId)
