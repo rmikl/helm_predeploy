@@ -6,17 +6,14 @@ pr:
 
 parameters:
 - name: azureCredentials
-  displayName: 'Azure Service Connection'
   type: string
   default: 'AZURE_SC'
 
 - name: environment
-  displayname: 'Environment'
   type: string
   default: 'dev-1'
 
 - name: helmOperation
-  displayname: 'Helm Operation'
   type: string
   default: 'apply'
   values:
@@ -24,12 +21,10 @@ parameters:
     - apply
 
 - name: project
-  displayname: 'Project Name'
   type: string
   default: 'rmikl' 
 
 - name: aksResourceGroup
-  displayname: 'AKS Resource Group'
   type: string
   default: 'rmikl-dev-1'
 
