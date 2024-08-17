@@ -4,6 +4,10 @@ repositories:
   url: https://charts.bitnami.com/bitnami
 - name: embrerstack
   url: https://emberstack.github.io/helm-charts
+- name: istio
+  url: https://istio-release.storage.googleapis.com/charts
+- name: softonic
+  url: https://charts.softonic.io
 
 releases:
 - name: reflector 
@@ -12,7 +16,7 @@ releases:
   version: 7.1.288
 
 - name: predeploy-chart
-  namespace: default
+  namespace: external-dns
   chart: ../../predeploy_chart
   version: 0.1.0
   values:
@@ -21,6 +25,30 @@ releases:
 - name: external-dns
   namespace: external-dns
   chart: bitnami/external-dns
-  version: 8.0.0
+  version: 8.3.5
   values:
   - ./helm-values/external-dns-dev-1.yaml  
+
+  - name: istio-base
+  namespace: external-dns
+  chart: istio/base
+  version: 1.23.0 
+  values: []
+
+- name: istiod
+  namespace: external-dns
+  chart: istio/istiod
+  version: 1.23.0
+  values: []
+
+- name: istio-ingress
+  namespace: external-dns
+  chart: istio/gateway
+  version: 1.23.0
+  values: []
+
+- name: hw-app
+  namespace: external-dns
+  chart: softonic/hello-world-app
+  version: 1.2.2
+  values: []

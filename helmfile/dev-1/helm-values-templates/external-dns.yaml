@@ -21,4 +21,12 @@ sources:
 - istio-gateway
 - istio-virtualservice
 
+polucy: sync
+registry: txt
+
+rbac:
+  create: true
+  serviceAccountName: external-dns
+
 annotationFilter: "external-dns.alpha.kubernetes.io/hostname"
+
