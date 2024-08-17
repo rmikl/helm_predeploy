@@ -8,6 +8,8 @@ repositories:
   url: https://istio-release.storage.googleapis.com/charts
 - name: softonic
   url: https://charts.softonic.io
+- name: argo
+  url: https://argoproj.github.io/argo-helm
 
 releases:
 - name: reflector 
@@ -53,3 +55,10 @@ releases:
   version: 8.3.5
   values:
   - ./helm-values/external-dns-dev-1.yaml
+
+- name: argo
+  namespace: argo
+  chart: argo/argo-cd
+  version: 7.4.4
+  values:
+  - ./helm-values/argo-dev-1.yaml

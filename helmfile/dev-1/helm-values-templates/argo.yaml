@@ -1,0 +1,30 @@
+server:
+  ingress:
+    enabled: false  
+
+  service:
+    type: ClusterIP 
+    annotations: {}  
+  extraArgs:
+    - --insecure
+
+  rbac:
+    enabled: true
+    policy:
+      default: role:readonly
+
+  config:
+    url: https://argo.rmikl.pl
+controller:
+  serviceAccount:
+    create: true
+    name: argocd-server
+
+redis:
+  usePassword: false
+  master:
+    persistence:
+      enabled: false
+  replica:
+    persistence:
+      enabled: false
