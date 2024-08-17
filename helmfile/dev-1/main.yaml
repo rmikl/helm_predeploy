@@ -54,7 +54,7 @@ releases:
   chart: argo/argo-cd
   version: 7.4.4
   values:
-  - ./helm-values/argo-dev-1.yaml
+  - ./helm-values/argocd-dev-1.yaml
 
 - name: external-dns
   namespace: external-dns
