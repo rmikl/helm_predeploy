@@ -70,7 +70,7 @@ stages:
 
           #####helmfile operation
           cd helmfile/${{ parameters.environment }}
-          helmfile ${{ parameters.helmOperation }} -f temp.yaml
+          helmfile ${{ parameters.helmOperation }} -f main.yaml
       env:
           CLIENT_ID: $(armClientId)
           CLIENT_SECRET: $(armClientSecret)
