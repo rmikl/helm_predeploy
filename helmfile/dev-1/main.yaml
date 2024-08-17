@@ -50,18 +50,10 @@ releases:
   - ./helm-values/predeploy-external-dns-dev-1.yaml
 
 - name: argo
-  namespace: argo
   chart: argo/argo-cd
   version: 7.4.4
   values:
   - ./helm-values/argo-dev-1.yaml
-  hooks:
-  - events: ["prepare-service-account"]
-    command: sh
-    args:
-    - -c
-    - |
-      kubectl apply -f k8s-objects/pre-install-serviceaccount.yaml
 
 - name: external-dns
   namespace: external-dns
