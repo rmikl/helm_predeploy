@@ -1,0 +1,47 @@
+gateway:
+  enabled: false
+  name: simple-gateway
+  selector:
+    istio: ingressgateway  # This assumes you're using Istio's default ingress gateway
+  port:
+    number: 80
+    name: http
+    protocol: HTTP
+  hosts:
+    - "example.com"
+    - "www.example.com"
+  tls:
+    enabled: false  # Set to true if you want to enable TLS
+    mode: SIMPLE
+    credentialName: "example-credential"
+    minProtocolVersion: TLSV1_2
+    maxProtocolVersion: TLSV1_3
+
+virtualServices: []
+#  - name: app1-virtualservice
+#    namespace: app1-namespace
+#    host: "app1.example.com"
+#    gateway: "istio-system/shared-gateway"
+#    serviceName: "app1-service"
+#    servicePort: 80
+#    tls:
+#      enabled: false
+#
+#  - name: app2-virtualservice
+#    namespace: app2-namespace
+#    host: "app2.example.com"
+#    gateway: "istio-system/shared-gateway"
+#    serviceName: "app2-service"
+#    servicePort: 443
+#    tls:
+#      enabled: true
+#      credentialName: "app2-credential"
+#
+#  - name: app3-virtualservice
+#    namespace: app3-namespace
+#    host: "app3.example.com"
+#    gateway: "istio-system/shared-gateway"
+#    serviceName: "app3-service"
+#    servicePort: 80
+#    tls:
+#      enabled: false

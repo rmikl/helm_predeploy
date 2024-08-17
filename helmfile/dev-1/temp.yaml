@@ -15,20 +15,6 @@ releases:
   chart: embrerstack/reflector
   version: 7.1.288
 
-- name: predeploy-chart
-  namespace: external-dns
-  chart: ../../predeploy_chart
-  version: 0.1.0
-  values:
-  - ./helm-values/predeploy-dev-1.yaml
-
-- name: external-dns
-  namespace: external-dns
-  chart: bitnami/external-dns
-  version: 8.3.5
-  values:
-  - ./helm-values/external-dns-dev-1.yaml  
-
 - name: istio-base
   namespace: istio-system
   chart: istio/base
@@ -47,8 +33,23 @@ releases:
   version: 1.23.0
   values: []
 
-- name: hw-app
+- name: predeploy-external-dns
   namespace: external-dns
-  chart: softonic/hello-world-app
-  version: 1.2.2
-  values: []
+  chart: ../../../predeploy-external-dns
+  version: 0.1.0
+  values:
+  - ./helm-values/predeploy-external-dns-dev-1.yaml
+
+- name: istio-networking
+  namespace: istio-system
+  chart: ../../../istio-networking
+  version: 0.1.0
+  values:
+  - ./helm-values/istio-networking-dev-1.yaml
+
+- name: external-dns
+  namespace: external-dns
+  chart: bitnami/external-dns
+  version: 8.3.5
+  values:
+  - ./helm-values/external-dns-dev-1.yaml

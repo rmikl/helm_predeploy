@@ -1,0 +1,39 @@
+{{- if .Values.gateway.enabled }}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ include "common.fullname" . }}-virtualservice
+  namespace: {{ .Release.Namespace }}
+spec:
+  hosts:
+    - {{ .Values.virtualService.host | quote }}
+  gateways:
+    - {{ .Values.virtualService.gateway | default "istio-system/shared-gateway" | quote }}
+  http:
+    {{- if .Values.virtualService.tls.enabled }}
+    - match:
+        - port: 443
+          uri:
+            prefix: /
+      route:
+        - destination:
+            host: {{ .Values.virtualService.serviceName | quote }}
+            port:
+              number: {{ .Values.virtualService.servicePort }}
+      tls:
+        mode: SIMPLE
+        credentialName: {{ .Values.virtualService.tls.credentialName | quote }}
+        sniHosts:
+          - {{ .Values.virtualService.host | quote }}
+    {{- else }}
+    - match:
+        - port: 80
+          uri:
+            prefix: /
+      route:
+        - destination:
+            host: {{ .Values.virtualService.serviceName | quote }}
+            port:
+              number: {{ .Values.virtualService.servicePort }}
+    {{- end }}
+{{- end }}

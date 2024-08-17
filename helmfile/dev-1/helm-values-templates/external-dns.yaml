@@ -21,7 +21,7 @@ sources:
 - istio-gateway
 - istio-virtualservice
 
-polucy: sync
+policy: sync
 registry: txt
 
 rbac:
@@ -30,3 +30,15 @@ rbac:
 
 annotationFilter: "external-dns.alpha.kubernetes.io/hostname"
 
+extraVolumes:
+  - name: azure-config-file
+    secret:
+      secretName: azure-credentials
+      items:
+        - key: azure.json
+          path: azure.json
+
+extraVolumeMounts:
+  - name: azure-config-file
+    mountPath: /etc/kubernetes
+    readOnly: true
