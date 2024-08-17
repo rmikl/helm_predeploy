@@ -28,7 +28,7 @@ virtualServices: []
 #      enabled: false
 #
 #  - name: app2-virtualservice
-#    namespace: app2-namespace
+#    namespace: app2-namespaces
 #    host: "app2.example.com"
 #    gateway: "istio-system/shared-gateway"
 #    serviceName: "app2-service"
