@@ -19,6 +19,9 @@ controller:
   serviceAccount:
     create: true
     name: argocd-server
+
+crd:
+  install: true
 redis:
   usePassword: false
   master:
