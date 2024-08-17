@@ -21,6 +21,6 @@ releases:
 - name: external-dns
   namespace: external-dns
   chart: bitnami/external-dns
-  version: 8.3.5
+  version: 8.0.0
   values:
   - ./helm-values/external-dns-dev-1.yaml  
