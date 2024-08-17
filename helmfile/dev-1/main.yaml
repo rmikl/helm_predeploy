@@ -50,6 +50,7 @@ releases:
   - ./helm-values/predeploy-external-dns-dev-1.yaml
 
 - name: argo
+  namespace: argocd
   chart: argo/argo-cd
   version: 7.4.4
   values:

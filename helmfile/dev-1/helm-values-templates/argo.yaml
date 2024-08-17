@@ -19,7 +19,6 @@ controller:
   serviceAccount:
     create: true
     name: argocd-server
-
 redis:
   usePassword: false
   master:

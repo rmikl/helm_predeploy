@@ -18,9 +18,9 @@ gateway:
 
 virtualServices: 
   - name: argo
-    namespace: argo
+    namespace: argocd
     host: "argo.example.com"
-    gateway: "istio-system/argo"
+    gateway: "istio-system/main-gateway"
     serviceName: "argo"
     servicePort: 80
     tls:
