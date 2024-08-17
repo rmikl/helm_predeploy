@@ -30,19 +30,19 @@ releases:
   - ./helm-values/external-dns-dev-1.yaml  
 
 - name: istio-base
-  namespace: external-dns
+  namespace: istio-system
   chart: istio/base
   version: 1.23.0 
   values: []
 
 - name: istiod
-  namespace: external-dns
+  namespace: istio-system
   chart: istio/istiod
   version: 1.23.0
   values: []
 
 - name: istio-ingress
-  namespace: external-dns
+  namespace: istio-system
   chart: istio/gateway
   version: 1.23.0
   values: []
