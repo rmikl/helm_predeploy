@@ -34,6 +34,13 @@ releases:
   chart: istio/gateway
   version: 1.23.0
   values: []
+  hooks:
+  - events: ["Wait for Istio Ingress Gateway to be ready"]
+    command: sh
+    args:
+    - -c
+    - |
+      sleep 30
 
 - name: predeploy-external-dns
   namespace: external-dns
@@ -42,12 +49,19 @@ releases:
   values:
   - ./helm-values/predeploy-external-dns-dev-1.yaml
 
-- name: istio-networking
-  namespace: istio-system
-  chart: ../../custom-charts/istio-networking
-  version: 0.1.0
+- name: argo
+  namespace: argo
+  chart: argo/argo-cd
+  version: 7.4.4
   values:
-  - ./helm-values/istio-networking-dev-1.yaml
+  - ./helm-values/argo-dev-1.yaml
+  hooks:
+  - events: ["prepare-service-account"]
+    command: sh
+    args:
+    - -c
+    - |
+      kubectl apply -f k8s-objects/pre-install-serviceaccount.yaml
 
 - name: external-dns
   namespace: external-dns
@@ -56,9 +70,11 @@ releases:
   values:
   - ./helm-values/external-dns-dev-1.yaml
 
-- name: argo
-  namespace: argo
-  chart: argo/argo-cd
-  version: 7.4.4
+- name: istio-networking
+  namespace: istio-system
+  chart: ../../custom-charts/istio-networking
+  version: 0.1.0
   values:
-  - ./helm-values/argo-dev-1.yaml
+  - ./helm-values/istio-networking-dev-1.yaml
+
+
