@@ -42,12 +42,12 @@ releases:
     - |
       sleep 30
 
-- name: predeploy-external-dns
-  namespace: external-dns
-  chart: ../../custom-charts/predeploy-external-dns
-  version: 0.1.0
-  values:
-  - ./helm-values/predeploy-external-dns-dev-1.yaml
+#- name: predeploy-external-dns
+#  namespace: external-dns
+#  chart: ../../custom-charts/predeploy-external-dns
+#  version: 0.1.0
+#  values:
+#  - ./helm-values/predeploy-external-dns-dev-1.yaml
 
 #- name: argocd
 #  namespace: argocd
