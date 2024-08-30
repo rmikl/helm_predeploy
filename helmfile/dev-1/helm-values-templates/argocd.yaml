@@ -15,10 +15,6 @@ server:
 
   config:
     url: https://argo.rmikl.pl
-controller:
-  serviceAccount:
-    create: true
-    name: argocd-server
 
 crd:
   install: true

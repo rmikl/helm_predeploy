@@ -8,8 +8,8 @@ repositories:
   url: https://istio-release.storage.googleapis.com/charts
 - name: softonic
   url: https://charts.softonic.io
-- name: argo
-  url: https://argoproj.github.io/argo-helm
+#- name: argo
+#  url: https://argoproj.github.io/argo-helm
 
 releases:
 - name: reflector 
@@ -35,7 +35,7 @@ releases:
   version: 1.23.0
   values: []
   hooks:
-  - events: ["Wait for Istio Ingress Gateway to be ready"]
+  - events: ["presync"]
     command: sh
     args:
     - -c
@@ -49,12 +49,12 @@ releases:
   values:
   - ./helm-values/predeploy-external-dns-dev-1.yaml
 
-- name: argocd
-  namespace: argocd
-  chart: argo/argo-cd
-  version: 7.4.4
-  values:
-  - ./helm-values/argocd-dev-1.yaml
+#- name: argocd
+#  namespace: argocd
+#  chart: argo/argo-cd
+#  version: 7.4.4
+#  values:
+#  - ./helm-values/argocd-dev-1.yaml
 
 - name: external-dns
   namespace: external-dns

@@ -1,5 +1,5 @@
 gateway:
-  enabled: 
+  enabled: true
   name: main-gateway
   selector:
     istio: ingress  # This assumes you're using Istio's default ingress gateway
@@ -19,7 +19,7 @@ gateway:
 virtualServices: 
   - name: argo
     namespace: argocd
-    host: "argo.example.com"
+    host: "argo.rmikl.pl"
     gateway: "istio-system/main-gateway"
     serviceName: "argo"
     servicePort: 80
