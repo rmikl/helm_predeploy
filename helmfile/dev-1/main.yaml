@@ -63,11 +63,11 @@ releases:
   values:
   - ./helm-values/external-dns-dev-1.yaml
 
-- name: istio-networking
-  namespace: istio-system
-  chart: ../../custom-charts/istio-networking
-  version: 0.1.0
-  values:
-  - ./helm-values/istio-networking-dev-1.yaml
+#- name: istio-networking
+#  namespace: istio-system
+#  chart: ../../custom-charts/istio-networking
+#  version: 0.1.0
+#  values:
+#  - ./helm-values/istio-networking-dev-1.yaml
 
 
