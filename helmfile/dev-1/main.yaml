@@ -8,8 +8,8 @@ repositories:
   url: https://istio-release.storage.googleapis.com/charts
 - name: softonic
   url: https://charts.softonic.io
-#- name: argo
-#  url: https://argoproj.github.io/argo-helm
+- name: argo
+  url: https://argoproj.github.io/argo-helm
 
 releases:
 - name: reflector 
@@ -49,12 +49,12 @@ releases:
   values:
   - ./helm-values/predeploy-external-dns-dev-1.yaml
 
-#- name: argocd
-#  namespace: argocd
-#  chart: argo/argo-cd
-#  version: 7.4.4
-#  values:
-#  - ./helm-values/argocd-dev-1.yaml
+- name: argocd
+  namespace: argocd
+  chart: argo/argo-cd
+  version: 7.4.4
+  values:
+  - ./helm-values/argocd-dev-1.yaml
 
 - name: external-dns
   namespace: external-dns
@@ -63,11 +63,9 @@ releases:
   values:
   - ./helm-values/external-dns-dev-1.yaml
 
-#- name: istio-networking
-#  namespace: istio-system
-#  chart: ../../custom-charts/istio-networking
-#  version: 0.1.0
-#  values:
-#  - ./helm-values/istio-networking-dev-1.yaml
-
-
+- name: istio-networking
+  namespace: istio-system
+  chart: ../../custom-charts/istio-networking
+  version: 0.1.0
+  values:
+  - ./helm-values/istio-networking-dev-1.yaml

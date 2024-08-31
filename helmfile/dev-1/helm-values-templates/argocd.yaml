@@ -4,7 +4,8 @@ server:
 
   service:
     type: ClusterIP 
-    annotations: {}  
+    annotations: {}
+    name: argocd
   extraArgs:
     - --insecure
 

@@ -27,18 +27,3 @@ registry: txt
 rbac:
   create: true
   serviceAccountName: external-dns
-
-annotationFilter: "external-dns.alpha.kubernetes.io/hostname"
-
-#extraVolumes:
-#  - name: azure-config-file
-#    secret:
-#      secretName: azure-credentials
-#      items:
-#        - key: azure.json
-#          path: azure.json
-#
-#extraVolumeMounts:
-#  - name: azure-config-file
-#    mountPath: /etc/kubernetes
-#    readOnly: true
