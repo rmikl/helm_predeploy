@@ -9,7 +9,7 @@ azure:
 domainFilters:
   - rmikl.pl
 
-namespace: ""
+namespaced: false
 
 txtOwnerId: externaldns
 namespace: external-dns
