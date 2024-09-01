@@ -72,5 +72,5 @@ releases:
   hooks:
   - events: ["prepare"]  # Run this before the Helm chart is deployed
     command: "kubectl"
-    args: ["create", "namespace", "arocd"]
+    args: ["create", "namespace", "argocd"]
     showlogs: true
