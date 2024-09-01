@@ -1,3 +1,5 @@
+{{- $gateway := .Values.gateway.name | default "istio-system/shared-gateway" | quote }}
+{{- if .Values.gateway.enabled }}
 {{- range .Values.virtualServices }}
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -8,7 +10,7 @@ spec:
   hosts:
     - {{ .host | quote }}
   gateways:
-    - {{ .gateway.name | default "istio-system/shared-gateway" | quote }}
+    - {{ $gateway }}
   http:
     {{- if .tls.enabled }}
     - match:

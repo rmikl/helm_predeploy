@@ -17,14 +17,14 @@ gateway:
 #    maxProtocolVersion: TLSV1_3
 
 virtualServices: 
-  - name: argo
-    namespace: argocd
-    host: "argo.rmikl.pl"
-    gateway: "istio-system/main-gateway"
-    serviceName: argocd
-    servicePort: 80
-    tls:
-      enabled: false
+- name: argo
+  namespace: argocd
+  host: "argo.rmikl.pl"
+  gateway: "istio-system/main-gateway"
+  serviceName: argocd
+  servicePort: 80
+  tls:
+    enabled: false
 #
 #  - name: app2-virtualservice
 #    namespace: app2-namespaces
