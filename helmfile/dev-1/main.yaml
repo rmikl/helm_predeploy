@@ -69,3 +69,8 @@ releases:
   version: 0.1.0
   values:
   - ./helm-values/istio-networking-dev-1.yaml
+  hooks:
+  - events: ["prepare"]  # Run this before the Helm chart is deployed
+    command: "kubectl"
+    args: ["create", "namespace", "arocd"]
+    showlogs: true
