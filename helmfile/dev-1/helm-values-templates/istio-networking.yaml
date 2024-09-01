@@ -21,7 +21,7 @@ virtualServices:
   namespace: argocd
   host: "argo.rmikl.pl"
   gateway: "istio-system/main-gateway"
-  serviceName: argocd
+  serviceName: argocd-server
   servicePort: 80
   tls:
     enabled: false
