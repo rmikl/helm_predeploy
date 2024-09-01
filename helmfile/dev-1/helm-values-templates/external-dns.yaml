@@ -12,7 +12,6 @@ domainFilters:
 namespaced: false
 
 txtOwnerId: externaldns
-namespace: external-dns
 logLevel: debug
 replicaCount: 1
 resources: {}
