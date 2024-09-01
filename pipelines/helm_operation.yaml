@@ -19,6 +19,7 @@ parameters:
   values:
     - destroy
     - apply
+    - sync
 
 - name: project
   type: string
