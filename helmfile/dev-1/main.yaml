@@ -69,8 +69,8 @@ releases:
   version: 0.1.0
   values:
   - ./helm-values/istio-networking-dev-1.yaml
-  hooks:
+ hooks:
   - events: ["prepare"]  # Run this before the Helm chart is deployed
-    command: "kubectl"
-    args: ["create", "namespace", "argocd"]
+    command: "sh"
+    args: ["-c", "kubectl create namespace argocd || echo 'namespace already exists'"]
     showlogs: true
