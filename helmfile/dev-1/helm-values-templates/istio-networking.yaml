@@ -8,7 +8,8 @@ gateway:
     name: http
     protocol: HTTP
   hosts:
-    - "*.rmikl.pl"
+    - nginx.rmikl.pl
+    - argo.rmikl.pl
   tls:
     enabled: false  # Set to true if you want to enable TLS
 #    mode: SIMPLE
