@@ -8,7 +8,7 @@ spec:
   hosts:
     - {{ .host | quote }}
   gateways:
-    - {{ .gateway | default "istio-system/shared-gateway" | quote }}
+    - {{ .gateway.name | default "istio-system/shared-gateway" | quote }}
   http:
     {{- if .tls.enabled }}
     - match:

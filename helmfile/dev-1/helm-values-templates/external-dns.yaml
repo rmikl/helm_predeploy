@@ -9,6 +9,8 @@ azure:
 domainFilters:
   - rmikl.pl
 
+namespace: ""
+
 txtOwnerId: externaldns
 namespace: external-dns
 logLevel: debug

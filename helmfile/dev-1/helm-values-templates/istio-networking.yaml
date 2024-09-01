@@ -31,7 +31,7 @@ virtualServices:
 #    host: "app2.example.com"
 #    gateway: "istio-system/shared-gateway"
 #    serviceName: "app2-service"
-#    servicePort: 443
+#    servicePort: 4
 #    tls:
 #      enabled: true
 #      credentialName: "app2-credential"
