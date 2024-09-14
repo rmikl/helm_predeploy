@@ -13,7 +13,7 @@ spec:
       reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: {{ .Values.certificate.namespacesToCopy | quote }}
   secretName: {{ .Values.certificate.domain }}
   issuerRef:
-    name: letsencrypt
+    name: letsencrypt-prod
     kind: ClusterIssuer
   commonName: {{ printf "*.%s" .Values.certificate.domain | quote }}
   dnsNames:
