@@ -27,7 +27,7 @@ spec:
       {{- end }}
       {{- if .Values.gateway.tls.maxProtocolVersion }}
       maxProtocolVersion: {{ .Values.gateway.tls.maxProtocolVersion | quote }}
-      httpsRedirect: true
+      httpsRedirect: false
       {{- end }}
     {{- end }}
 {{- end }}
