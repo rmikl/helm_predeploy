@@ -13,7 +13,7 @@ spec:
     - dns01:
         azureDNS:
           subscriptionID: {{ .Values.clusterIssuer.subscriptionIdRef }}
-          resourceGroupName: {{ .Values.clusterIssuer.resourceGroupSecretRef }}
+          resourceGroupName: {{ .Values.clusterIssuer.resourceGroupName }}
           hostedZoneName: {{ .Values.clusterIssuer.hostedZoneName }}
           environment: AzurePublicCloud 
           managedIdentity:
