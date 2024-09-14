@@ -14,8 +14,8 @@ spec:
     - {{ .gateway }}
   http:
     - match:
-        - port: {{ .matchPort }}
-          uri:
+        - uri:
+            port: {{ .matchPort }}
             prefix: /
       route:
         - destination:
