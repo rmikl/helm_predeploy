@@ -1,3 +1,4 @@
+{{- if eq .Values.clusterIssuer.enabled "true" }}
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
@@ -12,8 +13,9 @@ spec:
     - dns01:
         azureDNS:
           subscriptionID: {{ .Values.clusterIssuer.subscriptionIdRef }}
-          resourceGroupName: {{ .Values.clusterIssuer.resourceGroupName }}
+          resourceGroupName: {{ .Values.clusterIssuer.resourceGroupSecretRef }}
           hostedZoneName: {{ .Values.clusterIssuer.hostedZoneName }}
           environment: AzurePublicCloud 
           managedIdentity:
             clientID: {{ .Values.clusterIssuer.managedIdentityClientID }}
+{{- end }}
