@@ -5,15 +5,16 @@ kind: VirtualService
 metadata:
   name: {{ .name }}
   namespace: {{ .namespace }}
+  labels:
+    app.kubernetes.io/instance: istio-networking
 spec:
   hosts:
     - {{ .host | quote }}
   gateways:
     - {{ .gateway }}
   http:
-    {{- if .tls.enabled }}
     - match:
-        - port: 443
+        - port: {{ .matchPort }}
           uri:
             prefix: /
       route:
@@ -21,21 +22,5 @@ spec:
             host: {{ .serviceName | quote }}
             port:
               number: {{ .servicePort }}
-      tls:
-        mode: SIMPLE
-        credentialName: {{ .tls.credentialName | quote }}
-        sniHosts:
-          - {{ .host | quote }}
-    {{- else }}
-    - match:
-        - port: 80
-          uri:
-            prefix: /
-      route:
-        - destination:
-            host: {{ .serviceName | quote }}
-            port:
-              number: {{ .servicePort }}
-    {{- end }}
 {{- end }}
 {{- end }}
