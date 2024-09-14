@@ -1,32 +1,26 @@
 {{- if .Values.gateway.enabled }}
+{{- range .Values.virtualServices }}
 apiVersion: networking.istio.io/v1beta1
-kind: Gateway
+kind: VirtualService
 metadata:
-  name: {{ .Values.gateway.name }}
-  namespace: {{ .Release.Namespace }}
+  name: {{ .name }}
+  namespace: {{ .namespace }}
+  labels:
+    app.kubernetes.io/instance: istio-networking
 spec:
-  selector:
-    {{- range $key, $value := .Values.gateway.selector }}
-    {{ $key }}: {{ $value | quote }}
-    {{- end }}
-  servers:
-  - port:
-      number: {{ .Values.gateway.port.number }}
-      name: {{ .Values.gateway.port.name | quote }}
-      protocol: {{ .Values.gateway.port.protocol | quote }}
-    hosts:
-      {{- range .Values.gateway.hosts }}
-      - {{ . | quote }}
-      {{- end }}
-    {{- if .Values.gateway.tls.enabled }}
-    tls:
-      mode: {{ .Values.gateway.tls.mode | quote }}
-      credentialName: {{ .Values.gateway.tls.credentialName | quote }}
-      {{- if .Values.gateway.tls.minProtocolVersion }}
-      minProtocolVersion: {{ .Values.gateway.tls.minProtocolVersion | quote }}
-      {{- end }}
-      {{- if .Values.gateway.tls.maxProtocolVersion }}
-      maxProtocolVersion: {{ .Values.gateway.tls.maxProtocolVersion | quote }}
-      {{- end }}
-    {{- end }}
+  hosts:
+    - {{ .host | quote }}
+  gateways:
+    - {{ .gateway }}
+  http:
+    - match:
+        - port: {{ .matchPort }}
+          uri:
+            prefix: /
+      route:
+        - destination:
+            host: {{ .serviceName | quote }}
+            port:
+              number: {{ .servicePort }}
+{{- end }}
 {{- end }}
