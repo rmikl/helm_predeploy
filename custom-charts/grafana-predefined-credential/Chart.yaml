@@ -1,0 +1,6 @@
+apiVersion: v2
+name: grafana-predefined-credential
+description: A helm chart that creates a predefined credential for Grafana
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
