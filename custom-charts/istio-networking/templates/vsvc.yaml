@@ -10,22 +10,6 @@ spec:
   gateways:
     - {{ .gateway }}
   http:
-    {{- if .tls.enabled }}
-    - match:
-        - port: 443
-          uri:
-            prefix: /
-      route:
-        - destination:
-            host: {{ .serviceName | quote }}
-            port:
-              number: {{ .servicePort }}
-      tls:
-        mode: PASSTHROUGH
-        credentialName: {{ .tls.credentialName | quote }}
-        sniHosts:
-          - {{ .host | quote }}
-    {{- else }}
     - match:
         - uri:
             prefix: /
@@ -34,5 +18,4 @@ spec:
             host: {{ .serviceName | quote }}
             port:
               number: {{ .servicePort }}
-    {{- end }}
 {{- end }}
