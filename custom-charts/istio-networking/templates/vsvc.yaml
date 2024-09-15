@@ -1,4 +1,4 @@
-{{- range .Values.virtualServices }}
+{{ range .Values.virtualServices }}
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
@@ -18,4 +18,4 @@ spec:
             host: {{ .serviceName | quote }}
             port:
               number: {{ .servicePort }}
-{{- end }}
+{{ end }}
