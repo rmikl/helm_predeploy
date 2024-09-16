@@ -31,13 +31,16 @@ spec:
         image: {{ .Values.image.frontApp.repository }}:{{ .Values.image.frontApp.tag }}
         workingDir: {{ .Values.frontApp.workingDir }}
         command: {{ .Values.frontApp.command | toJson }}
-        args: | 
-          sleep 20
-          cd {{ .Values.gitSync.repoPath }}
-          echo "[`date`] NPM install"
-          npm install
-          echo "[`date`] NPM run dev"
-          npm run dev
+        args:
+          - /bin/sh
+          - "-c"
+          - |
+            sleep 20 && \
+            cd {{ .Values.gitSync.repoPath }} && \
+            echo "[`date`] NPM install" && \
+            npm install && \
+            echo "[`date`] NPM run dev" && \
+            npm run dev
         volumeMounts:
           - name: git-volume
             mountPath: /app
