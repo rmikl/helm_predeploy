@@ -21,7 +21,7 @@ spec:
           - name: GITPULLER_BRANCH
             value: {{ .Values.gitSync.branch | quote }}
           - name: GITPULLER_REPO_PATH
-            value: /app/{{ .Values.gitSync.repoPath | quote }}
+            value: /app/{{ .Values.gitSync.repoPath }}
           - name: SLEEP_TIME
             value: {{ .Values.gitSync.sleepTime | quote }}
         volumeMounts:
