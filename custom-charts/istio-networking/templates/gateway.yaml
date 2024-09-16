@@ -10,10 +10,11 @@ spec:
     {{ $key }}: {{ $value | quote }}
     {{- end }}
   servers:
+  # HTTPS Server
   - port:
-      number: {{ .Values.gateway.port.number }}
-      name: {{ .Values.gateway.port.name | quote }}
-      protocol: {{ .Values.gateway.port.protocol | quote }}
+      number: {{ .Values.gateway.httpsPort.number }}
+      name: {{ .Values.gateway.httpsPort.name | quote }}
+      protocol: {{ .Values.gateway.httpsPort.protocol | quote }}
     hosts:
       {{- range .Values.gateway.hosts }}
       - {{ . | quote }}
@@ -27,7 +28,18 @@ spec:
       {{- end }}
       {{- if .Values.gateway.tls.maxProtocolVersion }}
       maxProtocolVersion: {{ .Values.gateway.tls.maxProtocolVersion | quote }}
-      httpsRedirect: false
       {{- end }}
     {{- end }}
+
+  - port:
+      number: {{ .Values.gateway.httpPort.number }}
+      name: {{ .Values.gateway.httpPort.name | quote }}
+      protocol: {{ .Values.gateway.httpPort.protocol | quote }}
+    hosts:
+      {{- range .Values.gateway.hosts }}
+      - {{ . | quote }}
+      {{- end }}
+    tls:
+      httpsRedirect: true  # Enable HTTP to HTTPS redirection
+
 {{- end }}
