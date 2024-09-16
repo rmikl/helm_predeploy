@@ -30,16 +30,14 @@ spec:
       - name: frontapp-card
         image: {{ .Values.image.frontApp.repository }}:{{ .Values.image.frontApp.tag }}
         workingDir: {{ .Values.frontApp.workingDir }}
-        command: {{ .Values.frontApp.command | toJson }}
+        command: ["/bin/sh", "-c"]
         args:
-          - /bin/sh
-          - "-c"
           - |
-            sleep 20 && \
-            cd {{ .Values.gitSync.repoPath }} && \
-            echo "[`date`] NPM install" && \
-            npm install && \
-            echo "[`date`] NPM run dev" && \
+            sleep 20 
+            cd {{ .Values.gitSync.repoPath }} 
+            echo "[`date`] NPM install"
+            npm install
+            echo "[`date`] NPM run dev"
             npm run dev
         volumeMounts:
           - name: git-volume
