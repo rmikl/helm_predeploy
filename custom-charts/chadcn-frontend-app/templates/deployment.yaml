@@ -32,7 +32,7 @@ spec:
         workingDir: {{ .Values.frontApp.workingDir }}
         command: {{ .Values.frontApp.command | toJson }}
         args: | 
-|         sleep 20
+          sleep 20
           cd {{ .Values.gitSync.repoPath }}
           echo "[`date`] NPM install"
           npm install
