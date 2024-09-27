@@ -1,0 +1,21 @@
+{{- if .Values.clusterIssuer.enabled }}
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    email: robert.miklas@protonmail.com  # Replace with your email
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+    - dns01:
+        azureDNS:
+          subscriptionID: {{ .Values.clusterIssuer.subscriptionIdRef }}
+          resourceGroupName: {{ .Values.clusterIssuer.resourceGroupName }}
+          hostedZoneName: {{ .Values.clusterIssuer.hostedZoneName }}
+          environment: AzurePublicCloud 
+          managedIdentity:
+            clientID: {{ .Values.clusterIssuer.managedIdentityClientID }}
+{{- end }}

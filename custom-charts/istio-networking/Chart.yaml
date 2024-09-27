@@ -1,0 +1,6 @@
+apiVersion: v2
+name: istio-networking
+description: A helm chart for managing Istio networking resources like virtual services and gateways 
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

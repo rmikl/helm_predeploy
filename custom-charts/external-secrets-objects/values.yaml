@@ -1,0 +1,11 @@
+azure:
+  vaultUrl: "https://rmiklado.vault.azure.net/"
+  managedIdentityClientID: "944488c0-97e5-466b-be90-6a7b9b3af0cb"
+
+refreshInterval: "1h"
+targetSecretName: "azure-secret"
+
+secrets:
+  - secretKey: "tenantId"
+    remoteRef:
+      key: "tenantId"

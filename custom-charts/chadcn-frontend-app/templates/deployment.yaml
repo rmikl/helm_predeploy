@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.name }}
+    spec:
+      containers:
+      - name: git-sync
+        image: {{ .Values.image.gitSync.repository }}:{{ .Values.image.gitSync.tag }}
+        env:
+          - name: GITPULLER_REPO_URL
+            value: {{ .Values.gitSync.repoUrl | quote }}
+          - name: GITPULLER_BRANCH
+            value: {{ .Values.gitSync.branch | quote }}
+          - name: GITPULLER_REPO_PATH
+            value: /app/{{ .Values.gitSync.repoPath }}
+          - name: SLEEP_TIME
+            value: {{ .Values.gitSync.sleepTime | quote }}
+        volumeMounts:
+          - name: git-volume
+            mountPath: /app
+      - name: frontapp-card
+        image: {{ .Values.image.frontApp.repository }}:{{ .Values.image.frontApp.tag }}
+        workingDir: {{ .Values.frontApp.workingDir }}
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            sleep 20 
+            cd {{ .Values.gitSync.repoPath }} 
+            echo "[`date`] NPM install"
+            npm install
+            echo "[`date`] NPM run dev"
+            npm run dev
+        volumeMounts:
+          - name: git-volume
+            mountPath: /app
+        ports:
+        - containerPort: {{ .Values.frontApp.containerPort }}
+      volumes:
+      - name: git-volume
+        emptyDir: {}
