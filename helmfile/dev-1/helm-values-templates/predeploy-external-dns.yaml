@@ -1,6 +1,0 @@
-azure:
-  tenantId: "${TENANT_ID}"
-  subscriptionId: "${SUBSCRIPTION_ID}"
-  resourceGroup: "${RESOURCE_GROUP}"
-  aadClientId: "${CLIENT_ID}"
-  aadClientSecret: "${CLIENT_SECRET}"
