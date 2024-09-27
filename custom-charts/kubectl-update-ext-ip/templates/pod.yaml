@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Values.pod.name }}
+  namespace: {{ .Values.pod.namespace }}
+spec:
+  serviceAccountName: {{ .Values.serviceAccount.name }}
+  containers:
+    - name: kubectl
+      image: {{ .Values.pod.image }}
+      command:
+        {{- toYaml .Values.pod.command | nindent 8 }}
+      resources:
+        limits:
+          cpu: {{ .Values.pod.resources.limits.cpu }}
+          memory: {{ .Values.pod.resources.limits.memory }}
+        requests:
+          cpu: {{ .Values.pod.resources.requests.cpu }}
+          memory: {{ .Values.pod.resources.requests.memory }}
+      env:
+        - name: INTERVAL_TIME
+          value: "{{ .Values.pod.env.INTERVAL_TIME }}"
+        - name: POOL_NAME
+          value: "{{ .Values.pod.env.POOL_NAME }}"
+        - name: POOL_NAMESPACE
+          value: "{{ .Values.pod.env.POOL_NAMESPACE }}"
+  restartPolicy: Never
