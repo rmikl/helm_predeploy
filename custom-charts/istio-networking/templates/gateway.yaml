@@ -42,6 +42,6 @@ spec:
       - {{ . | quote }}
       {{- end }}
     tls:
-      httpsRedirect: true  # Enable HTTP to HTTPS redirection
+      httpsRedirect: false  # Enable HTTP to HTTPS redirection
 
 {{- end }}
