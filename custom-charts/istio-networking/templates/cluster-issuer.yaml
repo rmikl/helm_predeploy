@@ -11,7 +11,7 @@ spec:
       name: letsencrypt-prod
     solvers:
     - dns01:
-        {{- if .Values.clusterIssuer.azureDNS.enabled }}
+        {{- if (or .Values.clusterIssuer.azureDNS.enabled (default false .Values.clusterIssuer.azureDNS.enabled)) }}
         azureDNS:
           subscriptionID: {{ .Values.clusterIssuer.subscriptionIdRef }}
           resourceGroupName: {{ .Values.clusterIssuer.resourceGroupName }}
@@ -20,7 +20,7 @@ spec:
           managedIdentity:
             clientID: {{ .Values.clusterIssuer.managedIdentityClientID }}
         {{- end }}
-        {{- if .Values.clusterIssuer.cloudflare.enabled }}
+        {{- if (or .Values.clusterIssuer.cloudflare.enabled (default false .Values.clusterIssuer.cloudflare.enabled)) }}
         cloudflare:
           apiTokenSecretRef:
             name: external-dns
