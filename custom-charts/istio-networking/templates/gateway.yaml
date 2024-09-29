@@ -4,6 +4,8 @@ kind: Gateway
 metadata:
   name: {{ .Values.gateway.name }}
   namespace: {{ .Release.Namespace }}
+  annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
 spec:
   selector:
     {{- range $key, $value := .Values.gateway.selector }}
