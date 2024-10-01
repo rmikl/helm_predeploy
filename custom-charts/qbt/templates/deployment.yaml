@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  labels:
+    app: qbittorrent
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      containers:
+      - name: qbittorrent
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.service.webuiPort }}
+          name: webui-port
+        - containerPort: {{ .Values.service.torrentingPort }}
+          name: torrenting-port
+        - containerPort: {{ .Values.service.torrentingPort }}
+          protocol: UDP
+          name: torrenting-port-udp
+        env:
+        - name: PUID
+          value: "{{ .Values.env.PUID }}"
+        - name: PGID
+          value: "{{ .Values.env.PGID }}"
+        - name: TZ
+          value: "{{ .Values.env.TZ }}"
+        - name: WEBUI_PORT
+          value: "{{ .Values.env.WEBUI_PORT }}"
+        - name: TORRENTING_PORT
+          value: "{{ .Values.env.TORRENTING_PORT }}"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /config
+        - name: downloads-volume
+          mountPath: /downloads
+      volumes:
+      - name: config-volume
+        persistentVolumeClaim:
+          claimName: qbittorrent-config-pvc
+      - name: downloads-volume
+        persistentVolumeClaim:
+          claimName: qbittorrent-downloads-pvc
