@@ -45,7 +45,8 @@ spec:
       volumes:
         - name: config-volume
           persistentVolumeClaim:
-            claimName: {{ include "qbittorrent.fullname" . }}-config-pvc
+            claimName: qbittorrent-config-pvc
         - name: downloads-volume
           persistentVolumeClaim:
-            claimName: {{ include "qbittorrent.fullname" . }}-downloads-pvc
+            claimName: qbittorrent-downloads-pvc
+
