@@ -39,7 +39,7 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: /config
-              subPath: {{ .Values.persistence.config.subPath | quote }}  # Added subPath
+              subPath: {{ .Values.persistence.config.subPath | quote }}
             - name: downloads-volume
               mountPath: /downloads
       volumes:
