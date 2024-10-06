@@ -4,19 +4,17 @@ metadata:
   name: dlink
 provisioner: smb.csi.k8s.io
 parameters:
-  source: //192.168.1.22/Volume_1
-  csi.storage.k8s.io/provisioner-secret-name: dlink-credentials
-  csi.storage.k8s.io/provisioner-secret-namespace: cluster-operators
+  source: "//192.168.1.22/smb"
   csi.storage.k8s.io/node-stage-secret-name: dlink-credentials
   csi.storage.k8s.io/node-stage-secret-namespace: cluster-operators
-volumeBindingMode: Immediate
-mountOptions:
-  - dir_mode=0777
-  - file_mode=0777
-  - uid=1001
-  - gid=1001
-  - vers=1.0
-  - rsize=1048576
-  - wsize=1048576
-  - noperm
-  - noacl
+  csi.storage.k8s.io/node-publish-secret-name: dlink-credentials
+  csi.storage.k8s.io/node-publish-secret-namespace: cluster-operators
+reclaimPolicy: Retain
+volumeBindingMode: Immediate  
+allowVolumeExpansion: false
+mountOptions: 
+  - vers=2.0
+  - rsize=32768 
+  - wsize=32768 
+  - cache=loose 
+  - nobrl
