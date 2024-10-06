@@ -18,3 +18,5 @@ mountOptions:
   - wsize=32768 
   - cache=loose 
   - nobrl
+  - dir_mode=0777
+  - file_mode=0777
