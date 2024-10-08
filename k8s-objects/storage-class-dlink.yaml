@@ -19,9 +19,6 @@ mountOptions:
   - cache=loose 
   - nobrl
   - dir_mode=0777
-<<<<<<< Updated upstream
-  - file_mode=0777
-=======
   - file_mode=0777
 ---
 apiVersion: storage.k8s.io/v1
@@ -73,4 +70,3 @@ mountOptions:
   - wsize=32768
   - cache=loose
   - nobrl
->>>>>>> Stashed changes
