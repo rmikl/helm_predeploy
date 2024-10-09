@@ -41,6 +41,6 @@ mountOptions:
   - file_mode=0777
   - rsize=32768
   - wsize=32768  
-  - uid=33        # Set UID to www-data
-  - gid=33        # Set GID to www-data
+  - uid=33
+  - gid=33
   - cache=loose
