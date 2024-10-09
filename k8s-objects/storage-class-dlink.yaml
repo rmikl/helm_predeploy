@@ -27,7 +27,7 @@ metadata:
   name: dlink-ncloud
 provisioner: smb.csi.k8s.io
 parameters:
-  source: "//192.168.1.22/smb"
+  source: "//192.168.1.22/smb_db"
   csi.storage.k8s.io/node-stage-secret-name: dlink-credentials
   csi.storage.k8s.io/node-stage-secret-namespace: cluster-operators
   csi.storage.k8s.io/node-publish-secret-name: dlink-credentials
@@ -62,8 +62,8 @@ volumeBindingMode: Immediate
 allowVolumeExpansion: false
 mountOptions: 
   - vers=2.0
-  - dir_mode=0777
-  - file_mode=0777
+  - dir_mode=0770
+  - file_mode=0770
   - rsize=32768
   - wsize=32768
   - cache=loose
