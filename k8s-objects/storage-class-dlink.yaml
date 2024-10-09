@@ -37,9 +37,8 @@ volumeBindingMode: Immediate
 allowVolumeExpansion: false
 mountOptions: 
   - vers=2.0
-  - dir_mode=0777
-  - file_mode=0667
+  #- dir_mode=0777
+  #- file_mode=
   - rsize=32768
   - wsize=32768
   - cache=loose
-  - nobrl
