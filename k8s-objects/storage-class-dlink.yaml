@@ -43,4 +43,4 @@ mountOptions:
   - wsize=32768  
   - uid=33
   - gid=33
-  - cache=loose
+  - nobrl
