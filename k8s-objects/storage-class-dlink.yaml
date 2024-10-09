@@ -24,7 +24,7 @@ mountOptions:
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: dlink-ncloud
+  name: dlink-ssd
 provisioner: smb.csi.k8s.io
 parameters:
   source: "//192.168.1.22/smb_db"
@@ -37,33 +37,8 @@ volumeBindingMode: Immediate
 allowVolumeExpansion: false
 mountOptions: 
   - vers=2.0
-  - dir_mode=0770
-  - file_mode=0660
-  - uid=33
-  - gid=33
-  - rsize=32768
-  - wsize=32768
-  - cache=loose
-  - nobrl
----
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: dlink-db
-provisioner: smb.csi.k8s.io
-parameters:
-  source: "//192.168.1.22/smb_db"
-  csi.storage.k8s.io/node-stage-secret-name: dlink-credentials
-  csi.storage.k8s.io/node-stage-secret-namespace: cluster-operators
-  csi.storage.k8s.io/node-publish-secret-name: dlink-credentials
-  csi.storage.k8s.io/node-publish-secret-namespace: cluster-operators
-reclaimPolicy: Retain
-volumeBindingMode: Immediate  
-allowVolumeExpansion: false
-mountOptions: 
-  - vers=2.0
-  - dir_mode=0770
-  - file_mode=0770
+  - dir_mode=0777
+  - file_mode=0667
   - rsize=32768
   - wsize=32768
   - cache=loose
