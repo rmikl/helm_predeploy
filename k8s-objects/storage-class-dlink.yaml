@@ -44,3 +44,4 @@ mountOptions:
   - uid=33
   - gid=33
   - nobrl
+  - mfsymlimks
