@@ -33,8 +33,8 @@ spec:
             - |
 {{ .Values.initContainer.command | indent 14 }}
           volumeMounts:
-            - name: filebrowser-volume
-              mountPath: /mnt
+            - name: config-volume
+              mountPath: /mnt/config
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -45,7 +45,11 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            {{- range .Values.volumeMounts }}
+            {{- range .Values.volumeMounts.data }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+            {{- end }}
+            {{- range .Values.volumeMounts.config }}
             - name: {{ .name }}
               mountPath: {{ .mountPath }}
               {{- if .subPath }}
@@ -53,6 +57,21 @@ spec:
               {{- end }}
             {{- end }}
       volumes:
-        - name: filebrowser-volume
+        {{- if and .Values.persistence.data.enabled (not .Values.persistence.data.existingClaim) }}
+        - name: data-volume
           persistentVolumeClaim:
-            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{ else }}{{ include "filebrowser.fullname" . }}{{ end }}
+            claimName: {{ include "filebrowser.fullname" . }}-data
+        {{- else if .Values.persistence.data.existingClaim }}
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.data.existingClaim }}
+        {{- end }}
+        {{- if and .Values.persistence.config.enabled (not .Values.persistence.config.existingClaim) }}
+        - name: config-volume
+          persistentVolumeClaim:
+            claimName: {{ include "filebrowser.fullname" . }}-config
+        {{- else if .Values.persistence.config.existingClaim }}
+        - name: config-volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.config.existingClaim }}
+        {{- end }}
