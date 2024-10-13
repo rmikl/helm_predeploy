@@ -41,7 +41,4 @@ mountOptions:
   - file_mode=0777
   - rsize=32768
   - wsize=32768  
-  - uid=33
-  - gid=33
   - nobrl
-  - mfsymlinks

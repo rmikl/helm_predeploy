@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "filebrowser.fullname" . }}
+  labels:
+    {{ include "filebrowser.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "filebrowser.name" . }}
+  template:
+    metadata:
+      labels:
+        {{ include "filebrowser.labels" . | nindent 8 }}
+      annotations:
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      initContainers:
+        - name: {{ .Values.initContainer.name }}
+          image: {{ .Values.initContainer.image }}
+          command:
+            - sh
+            - -c
+            - |
+{{ .Values.initContainer.command | indent 14 }}
+          volumeMounts:
+            - name: config-volume
+              mountPath: /mnt/config
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: {{ toJson .Values.args }}
+          ports:
+            - containerPort: {{ .Values.containerPort }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            {{- range .Values.volumeMounts.data }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+            {{- end }}
+            {{- range .Values.volumeMounts.config }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+              {{- if .subPath }}
+              subPath: {{ .subPath }}
+              {{- end }}
+            {{- end }}
+      volumes:
+        {{- if and .Values.persistence.data.enabled (not .Values.persistence.data.existingClaim) }}
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: {{ include "filebrowser.fullname" . }}-data
+        {{- else if .Values.persistence.data.existingClaim }}
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.data.existingClaim }}
+        {{- end }}
+        {{- if and .Values.persistence.config.enabled (not .Values.persistence.config.existingClaim) }}
+        - name: config-volume
+          persistentVolumeClaim:
+            claimName: {{ include "filebrowser.fullname" . }}-config
+        {{- else if .Values.persistence.config.existingClaim }}
+        - name: config-volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.config.existingClaim }}
+        {{- end }}
