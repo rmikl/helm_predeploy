@@ -13,7 +13,7 @@ reclaimPolicy: Retain
 volumeBindingMode: Immediate  
 allowVolumeExpansion: false
 mountOptions: 
-  - vers=2.0
+  - vers=2.1
   - rsize=32768 
   - wsize=32768 
   - cache=loose 
