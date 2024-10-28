@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vnc-server
+spec:
+  type: {{ .Values.vncServer.service.type }}
+  selector:
+    app: vnc-server
+  ports:
+  - protocol: TCP
+    port: {{ .Values.vncServer.service.port }}
+    targetPort: 5900

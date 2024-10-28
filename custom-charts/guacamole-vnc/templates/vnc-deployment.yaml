@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vnc-server
+  labels:
+    app: vnc-server
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: vnc-server
+  template:
+    metadata:
+      labels:
+        app: vnc-server
+    spec:
+      serviceAccountName: {{ .Values.vncServer.serviceAccount.name }}
+      containers:
+      - name: vnc-server
+        image: "{{ .Values.vncServer.image.repository }}:{{ .Values.vncServer.image.tag }}"
+        ports:
+        - containerPort: 5900

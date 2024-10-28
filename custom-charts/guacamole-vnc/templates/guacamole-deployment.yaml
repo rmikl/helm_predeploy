@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guacamole
+  labels:
+    app: guacamole
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: guacamole
+  template:
+    metadata:
+      labels:
+        app: guacamole
+    spec:
+      containers:
+      - name: guacamole
+        image: "{{ .Values.guacamole.image.repository }}:{{ .Values.guacamole.image.tag }}"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: GUACD_HOSTNAME
+          value: "{{ .Values.guacamole.env.guacd_hostname }}"
+        - name: VNC_HOSTNAME
+          value: "{{ .Values.guacamole.env.vnc_hostname }}"
+        - name: VNC_PORT
+          value: "{{ .Values.guacamole.env.vnc_port }}"

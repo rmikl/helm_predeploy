@@ -1,0 +1,23 @@
+vncServer:
+  image:
+    repository: doro89/vnc-server
+    tag: latest
+  service:
+    type: ClusterIP
+    port: 5900
+  serviceAccount:
+    name: vnc-server-sa
+
+replicaCount: 1
+
+guacamole:
+  image:
+    repository: guacamole/guacamole
+    tag: latest
+  service:
+    type: LoadBalancer
+    port: 8080
+  env:
+    guacd_hostname: guacd
+    vnc_hostname: vnc-server
+    vnc_port: 5900
