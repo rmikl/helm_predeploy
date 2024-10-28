@@ -1,29 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vnc-server
+  name: guacamole
   labels:
-    app: vnc-server
+    app: guacamole
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: vnc-server
+      app: guacamole
   template:
     metadata:
       labels:
-        app: vnc-server
+        app: guacamole
     spec:
-      serviceAccountName: {{ .Values.vncServer.serviceAccount.name }}
       containers:
-      - name: vnc-server
-        image: "{{ .Values.vncServer.image.repository }}:{{ .Values.vncServer.image.tag }}"
-        command: [ "tightvncserver", ":1", "-geometry", "1280x800", "-depth", "24" ]
+      - name: guacamole
+        image: "{{ .Values.guacamole.image.repository }}:{{ .Values.guacamole.image.tag }}"
         ports:
-        - containerPort: 5901
+        - containerPort: 8080
         env:
-        - name: VNC_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.vncServer.secret.name }}
-              key: {{ .Values.vncServer.secret.key }}
+        - name: GUACD_HOSTNAME
+          value: "{{ .Values.guacamole.env.guacd_hostname }}"
+        - name: VNC_HOSTNAME
+          value: "{{ .Values.guacamole.env.vnc_hostname }}"
+        - name: VNC_PORT
+          value: "{{ .Values.guacamole.env.vnc_port }}"
