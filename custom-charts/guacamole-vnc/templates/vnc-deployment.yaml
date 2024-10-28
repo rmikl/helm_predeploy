@@ -19,4 +19,4 @@ spec:
       - name: vnc-server
         image: "{{ .Values.vncServer.image.repository }}:{{ .Values.vncServer.image.tag }}"
         ports:
-        - containerPort: 5900
+        - containerPort: 5901
