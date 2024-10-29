@@ -6,6 +6,9 @@ metadata:
     {{- include "vnc.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
+  selector:
+    matchLabels:
+{{ include "vnc.selectorLabels" . | indent 6 }}
   ports:
     - name: http
       port: {{ .Values.service.httpPort }}
