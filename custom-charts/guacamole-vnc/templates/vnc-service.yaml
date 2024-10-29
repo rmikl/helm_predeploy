@@ -1,12 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: vnc-server
+  name: {{ include "vnc.fullname" . }}
+  labels:
+    {{- include "vnc.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.vncServer.service.type }}
-  selector:
-    app: vnc-server
+  type: {{ .Values.service.type }}
   ports:
-  - protocol: TCP
-    port: {{ .Values.vncServer.service.port }}
-    targetPort: 5901
+    - name: http
+      port: {{ .Values.service.httpPort }}
+      targetPort: 80
+      nodePort: {{ .Values.service.httpNodePort }}

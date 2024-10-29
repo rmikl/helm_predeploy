@@ -1,23 +1,20 @@
-vncServer:
-  image:
-    repository: doro89/vnc-server
-    tag: latest
-  service:
-    type: ClusterIP
-    port: 5900
-  serviceAccount:
-    name: vnc-server-sa
-
 replicaCount: 1
 
-guacamole:
-  image:
-    repository: guacamole/guacamole
-    tag: latest
-  service:
-    type: LoadBalancer
-    port: 8080
-  env:
-    guacd_hostname: guacd
-    vnc_hostname: vnc-server
-    vnc_port: 5900
+image:
+  repository: elestio/docker-desktop-vnc
+  pullPolicy: IfNotPresent
+  tag: latest
+
+service:
+  type: NodePort
+  httpPort: 80
+  httpNodePort: 30080
+
+existingSecret: "docker-desktop-vnc-secret"
+
+vncServer:
+  serviceAccount:
+    name: vnc-admin
+
+env:
+  USER: "rmikl"

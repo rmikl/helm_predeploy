@@ -1,22 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vnc-server
+  name: {{ include "vnc.fullname" . }}
   labels:
-    app: vnc-server
+    {{ include "vnc.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
-  selector:
-    matchLabels:
-      app: vnc-server
   template:
     metadata:
       labels:
-        app: vnc-server
+        {{ include "vnc.labels" . | indent 4 }}
     spec:
       serviceAccountName: {{ .Values.vncServer.serviceAccount.name }}
       containers:
-      - name: vnc-server
-        image: "{{ .Values.vncServer.image.repository }}:{{ .Values.vncServer.image.tag }}"
-        ports:
-        - containerPort: 5901
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+            - name: vnc
+              containerPort: 5900
+          env:
+            - name: USER
+              value: "{{ .Values.env.USER }}"
+            - name: VNC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecret }}
+                  key: VNC_PASSWORD
+            - name: HTTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecret }}
+                  key: HTTP_PASSWORD
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecret }}
+                  key: PASSWORD
