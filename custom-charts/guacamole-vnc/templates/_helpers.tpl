@@ -25,12 +25,23 @@ Define the chart name and version.
 {{- end }}
 
 {{/*
+Selector labels - should be a subset of labels
+*/}}
+{{- define "vnc.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "vnc.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
 Create chart labels.
 */}}
 {{- define "vnc.labels" -}}
 helm.sh/chart: {{ .Chart.Name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 app.kubernetes.io/version: {{ .Chart.AppVersion }}
-app.kubernetes.io/name: {{ include "vnc.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "vnc.selectorLabels" . }}
+{{- end -}}
+{{/*
 {{- end }}
+*/}}
+

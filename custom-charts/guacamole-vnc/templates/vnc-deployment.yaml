@@ -6,6 +6,9 @@ metadata:
 {{ include "vnc.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+{{ include "vnc.selectorLabels" . | indent 6 }}
   template:
     metadata:
       labels:
