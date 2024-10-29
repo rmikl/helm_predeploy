@@ -3,13 +3,13 @@ kind: Deployment
 metadata:
   name: {{ include "vnc.fullname" . }}
   labels:
-    {{ include "vnc.labels" . | indent 4 }}
+{{ include "vnc.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
-        {{ include "vnc.labels" . | indent 4 }}
+{{ include "vnc.labels" . | indent 8 }}
     spec:
       serviceAccountName: {{ .Values.vncServer.serviceAccount.name }}
       containers:
