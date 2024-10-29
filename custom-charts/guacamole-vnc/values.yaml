@@ -8,7 +8,7 @@ image:
 service:
   type: NodePort
   httpPort: 80
-  httpNodePort: 30080
+  httpNodePort: 30081
 
 existingSecret: "docker-desktop-vnc-secret"
 
