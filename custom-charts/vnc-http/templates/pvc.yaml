@@ -4,7 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ include "vnc.fullname" . }}-pvc
   labels:
-    {{ include "vnc.labels" . | indent 6 }}
+{{ include "vnc.labels" . | indent 4 }}
 spec:
   accessModes:
     - ReadWriteOnce
