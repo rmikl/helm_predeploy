@@ -13,7 +13,7 @@ Create a fullname using the release name and the chart name.
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else }}
 {{- $name := include "vnc.name" . -}}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s" $name | trunc 63 | trimSuffix "-" -}}
 {{- end }}
 {{- end }}
 
