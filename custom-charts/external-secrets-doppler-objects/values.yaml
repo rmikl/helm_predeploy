@@ -10,6 +10,7 @@ externalSecret:
     kind: SecretStore
     name: doppler-auth-api
   targetSecretName: auth-api-db-url
+  namespacesToCopy: "media"
   data:
     - secretKey: CF_API_TOKEN
       remoteRefKey: CF_API_TOKEN

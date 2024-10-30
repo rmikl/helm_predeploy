@@ -10,7 +10,7 @@ service:
   httpPort: 80
   httpNodePort: 30081
 
-existingSecret: "docker-desktop-vnc-secret"
+existingSecret: "vnc-credentials"
 
 vncServer:
   serviceAccount:
