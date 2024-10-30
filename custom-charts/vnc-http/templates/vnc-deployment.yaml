@@ -22,11 +22,13 @@ spec:
           ports:
             - name: http
               containerPort: 80
-            - name: vnc
-              containerPort: 5900
+            #- name: vnc
+            #  containerPort: 5900
           env:
             - name: USER
               value: "{{ .Values.env.USER }}"
+            - name: RESOLUTION
+              value: "{{ .Values.env.RESOLUTION }}"
             - name: VNC_PASSWORD
               valueFrom:
                 secretKeyRef:
