@@ -22,8 +22,6 @@ spec:
           ports:
             - name: http
               containerPort: 80
-            #- name: vnc
-            #  containerPort: 5900
           env:
             - name: USER
               value: "{{ .Values.env.USER }}"
@@ -44,3 +42,10 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.existingSecret }}
                   key: PASSWORD
+          volumeMounts:
+            - name: vnc-storage
+              mountPath: /mnt/dlink
+      volumes:
+        - name: vnc-storage
+          persistentVolumeClaim:
+            claimName: {{ include "vnc.fullname" . }}-pvc

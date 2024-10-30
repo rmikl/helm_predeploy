@@ -1,0 +1,15 @@
+{{- if .Values.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "vnc.fullname" . }}-pvc
+  labels:
+    {{ include "vnc.labels" . | indent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: dlink
+  resources:
+    requests:
+      storage: {{ .Values.persistence.size }}
+{{- end }}
