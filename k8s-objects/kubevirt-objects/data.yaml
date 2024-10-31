@@ -3,7 +3,9 @@ kind: DataVolume
 metadata:
   name: "ubntu-24.10"
 spec:
-  storage:
+  storage:   
+    accessModes:
+    - ReadWriteOnce
     resources:
       requests:
         storage: 20Gi
