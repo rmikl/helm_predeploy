@@ -9,6 +9,7 @@ spec:
     resources:
       requests:
         storage: 20Gi
+    storageClassName: "local-storage"
   source:
     http:
       url: "https://cloud-images.ubuntu.com/daily/server/releases/24.10/release/ubuntu-24.10-server-cloudimg-amd64.img"
