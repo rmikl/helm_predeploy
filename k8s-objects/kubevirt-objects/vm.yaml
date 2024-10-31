@@ -1,0 +1,38 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  labels:
+    kubevirt.io/os: linux
+  name: ubuntu
+spec:
+  runStrategy: Always
+  template:
+    metadata:
+      labels:
+        kubevirt.io/domain: vm1
+    spec:
+      domain:
+        cpu:
+          cores: 2
+        devices:
+          disks:
+          - disk:
+              bus: virtio
+            name: disk0
+        machine:
+          type: q35
+        resources:
+          requests:
+            memory: 1024M
+      volumes:
+      - name: disk0
+        persistentVolumeClaim:
+          claimName: "ubntu-24.10"
+      - cloudInitNoCloud:
+          userData: |
+            hostname: vm1
+            ssh_pwauth: True
+            disable_root: false
+            ssh_authorized_keys:
+            - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzELBoYNkMYESnrss0201yruPo9DB0lwmUWM1yaTMyzLfW08TNyWgFfYF5VcYkbQDrH4Bh6Kzz7BDlfIuiMLkKAosQCUqgseInzoVkM8CMF6O7a7WjVQBDelAmV6AqDn2YGlYgKyDFJppqDoSo6mxPW2JNAEwzV8l2F+tNBA6bpmh7iT9TCotI8LZAayGHhzC5Dl2CxmukfUeqHK3Vbm+hhPzi+lTtYsmX4GL23agsfdoB5Sogts3qvVyyXEJdbtVJHF+LVaJkKd5NB3mRBOCqKtq1P+7zVhxgL7Dr3f8mbpfpdgaUYMN9tN7MBjCq8bpPliI0IgynbdcI/pt88j8T2nUwBtifPsTLaofo67vFlhu2JDJJUJLLMIjhqu7zo2bPe3VNr/LRvAOVKyA4DJN0ctl3P6mry4iHl2ncAMbG8YU+YQOsTW/u+SV3cAvXsGb7tfCf5F9a11Pr6s86YF02pZfSZ1o4er8+jBdsNVH7VfnotKbWfyE1+zG028WHaQ0=
+        name: cloudinitdisk

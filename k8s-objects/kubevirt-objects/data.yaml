@@ -1,0 +1,12 @@
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: "ubntu-24.10"
+spec:
+  storage:
+    resources:
+      requests:
+        storage: 20Gi
+  source:
+    http:
+      url: "https://cloud-images.ubuntu.com/daily/server/releases/24.10/release/ubuntu-24.10-server-cloudimg-amd64.img"
