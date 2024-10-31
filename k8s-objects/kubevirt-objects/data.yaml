@@ -1,7 +1,7 @@
 apiVersion: cdi.kubevirt.io/v1beta1
 kind: DataVolume
 metadata:
-  name: "ubntu-24.10"
+  name: "ubuntu-24.10"
 spec:
   storage:   
     accessModes:

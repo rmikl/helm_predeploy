@@ -27,7 +27,7 @@ spec:
       volumes:
       - name: disk0
         persistentVolumeClaim:
-          claimName: "ubntu-24.10"
+          claimName: "ubuntu-24.10"
       - cloudInitNoCloud:
           userData: |
             hostname: vm1
