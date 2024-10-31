@@ -1,0 +1,69 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: dlink
+provisioner: smb.csi.k8s.io
+parameters:
+  source: "//192.168.1.22/smb"
+  csi.storage.k8s.io/node-stage-secret-name: dlink-credentials
+  csi.storage.k8s.io/node-stage-secret-namespace: cluster-operators
+  csi.storage.k8s.io/node-publish-secret-name: dlink-credentials
+  csi.storage.k8s.io/node-publish-secret-namespace: cluster-operators
+reclaimPolicy: Retain
+volumeBindingMode: Immediate  
+allowVolumeExpansion: false
+mountOptions: 
+  - vers=2.0
+  - rsize=32768 
+  - wsize=32768 
+  - cache=loose 
+  - nobrl
+  - dir_mode=0777
+  - file_mode=0777
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: dlink-ssd
+provisioner: smb.csi.k8s.io
+parameters:
+  source: "//192.168.1.22/smb_db"
+  csi.storage.k8s.io/node-stage-secret-name: dlink-credentials
+  csi.storage.k8s.io/node-stage-secret-namespace: cluster-operators
+  csi.storage.k8s.io/node-publish-secret-name: dlink-credentials
+  csi.storage.k8s.io/node-publish-secret-namespace: cluster-operators
+reclaimPolicy: Retain
+volumeBindingMode: Immediate  
+allowVolumeExpansion: false
+mountOptions: 
+  - vers=2.0
+  - dir_mode=0777
+  - file_mode=0777
+  - rsize=32768
+  - wsize=32768  
+  - nobrl
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: dlink-home
+provisioner: smb.csi.k8s.io
+parameters:
+  source: "//192.168.1.22/smb"
+  csi.storage.k8s.io/node-stage-secret-name: dlink-credentials
+  csi.storage.k8s.io/node-stage-secret-namespace: cluster-operators
+  csi.storage.k8s.io/node-publish-secret-name: dlink-credentials
+  csi.storage.k8s.io/node-publish-secret-namespace: cluster-operators
+reclaimPolicy: Retain
+volumeBindingMode: Immediate  
+allowVolumeExpansion: false
+mountOptions: 
+  - vers=2.0
+  - rsize=32768 
+  - wsize=32768 
+  - cache=loose 
+  - nobrl
+  - dir_mode=0744
+  - file_mode=0744
+  - uid=1001
+  - gid=1001 
