@@ -1,49 +1,49 @@
-apiVersion: kubevirt.io/v1
-kind: VirtualMachine
-metadata:
-  labels:
-    kubevirt.io/os: linux
-  name: ubuntu
-spec:
-  runStrategy: Always
-  template:
-    metadata:
-      labels:
-        kubevirt.io/domain: vm1
-    spec:
-      domain:
-        cpu:
-          cores: 2
-        devices:
-          gpu: 
-          - deviceName: gpu1
-            name: gpu.intel.com/i915
-          disks:
-          - disk:
-              bus: virtio
-            name: disk0
-        machine:
-          type: q35
-        resources:
-          requests:
-            memory: 3000M
-            #passwd: $6$CUD.VWR2w50TCty3$KYjjEuPjXxCLzPdD5U2OEAbSA5H4WOWfrswO1QkW/wcoaONDPFKnRuEBrjyAaWfztrSj8xAYYS0fnw4MHn3.a0
-            #passwd: "robert"
-      volumes:
-      - name: disk0
-        persistentVolumeClaim:
-          claimName: "ubuntu-24.10"
-      - name: cloudinitdisk
-        cloudInitNoCloud:
-          userData: |
-            #cloud-config
-            ssh_pwauth: True
-            disable_root: false
-            users:
-            - name: robert
-              sudo: ALL=(ALL) NOPASSWD:ALL
-              groups: sudo
-              shell: /bin/bash
-              ssh_authorized_keys:
-                - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILuE1RxLSKiyoiaNvPRZqwaMrBjOSkxY9uu77ExC+Nmp robert@robert
-              lock_passwd: false
+  apiVersion: kubevirt.io/v1
+  kind: VirtualMachine
+  metadata:
+    labels:
+      kubevirt.io/os: linux
+    name: ubuntu
+  spec:
+    runStrategy: Always
+    template:
+      metadata:
+        labels:
+          kubevirt.io/domain: vm1
+      spec:
+        domain:
+          cpu:
+            cores: 2
+          devices:
+            gpu: 
+            - deviceName: intel-gpu
+              name: gpu.intel.com/i915
+            disks:
+            - disk:
+                bus: virtio
+              name: disk0
+          machine:
+            type: q35
+          resources:
+            requests:
+              memory: 3G
+              #passwd: $6$CUD.VWR2w50TCty3$KYjjEuPjXxCLzPdD5U2OEAbSA5H4WOWfrswO1QkW/wcoaONDPFKnRuEBrjyAaWfztrSj8xAYYS0fnw4MHn3.a0
+              #passwd: "robert"
+        volumes:
+        - name: disk0
+          persistentVolumeClaim:
+            claimName: "ubuntu-24.10"
+        - name: cloudinitdisk
+          cloudInitNoCloud:
+            userData: |
+              #cloud-config
+              ssh_pwauth: True
+              disable_root: false
+              users:
+              - name: robert
+                sudo: ALL=(ALL) NOPASSWD:ALL
+                groups: sudo
+                shell: /bin/bash
+                ssh_authorized_keys:
+                  - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILuE1RxLSKiyoiaNvPRZqwaMrBjOSkxY9uu77ExC+Nmp robert@robert
+                lock_passwd: false
