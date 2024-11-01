@@ -28,6 +28,8 @@
             requests:
               memory: 3G
               nvidia.com/gpu: 1
+            limits:
+              nvidia.com/gpu: 1
               #passwd: $6$CUD.VWR2w50TCty3$KYjjEuPjXxCLzPdD5U2OEAbSA5H4WOWfrswO1QkW/wcoaONDPFKnRuEBrjyAaWfztrSj8xAYYS0fnw4MHn3.a0
               #passwd: "robert"
         volumes:
