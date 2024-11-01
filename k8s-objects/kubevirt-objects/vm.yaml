@@ -15,6 +15,9 @@ spec:
         cpu:
           cores: 2
         devices:
+          gpu: 
+          - deviceName: gpu1
+            name: gpu.intel.com/i915
           disks:
           - disk:
               bus: virtio
@@ -23,8 +26,9 @@ spec:
           type: q35
         resources:
           requests:
-            memory: 1024M
+            memory: 3000M
             #passwd: $6$CUD.VWR2w50TCty3$KYjjEuPjXxCLzPdD5U2OEAbSA5H4WOWfrswO1QkW/wcoaONDPFKnRuEBrjyAaWfztrSj8xAYYS0fnw4MHn3.a0
+            #passwd: "robert"
       volumes:
       - name: disk0
         persistentVolumeClaim:
@@ -43,4 +47,3 @@ spec:
               ssh_authorized_keys:
                 - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILuE1RxLSKiyoiaNvPRZqwaMrBjOSkxY9uu77ExC+Nmp robert@robert
               lock_passwd: false
-              passwd: "robert"
