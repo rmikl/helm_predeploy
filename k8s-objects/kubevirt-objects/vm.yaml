@@ -14,6 +14,16 @@
         domain:
           cpu:
             cores: 2
+          securityContext:
+            privileged: true
+            runAsUser: 107
+            runAsGroup: 107
+            capabilities:
+              add:
+              - SYS_ADMIN
+              - IPC_LOCK
+              drop:
+              - ALL
           devices:
             #gpus: 
             #- deviceName: gpu.intel.com/i915  # Use the fully qualified resource name
