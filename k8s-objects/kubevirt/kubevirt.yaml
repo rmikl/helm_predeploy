@@ -7968,6 +7968,7 @@ spec:
     developerConfiguration:
       featureGates: 
       - MultiArchitecture
+      - GPU
   customizeComponents: {}
   imagePullPolicy: IfNotPresent
   workloadUpdateStrategy: {}
