@@ -15,7 +15,7 @@
           cpu:
             cores: 2
           devices:
-            gpu: 
+            gpus: 
             - deviceName: intel-gpu
               name: gpu.intel.com/i915
             disks:
