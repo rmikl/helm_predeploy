@@ -15,9 +15,9 @@
           cpu:
             cores: 2
           devices:
-            gpus: 
-            - deviceName: gpu.intel.com/i915  # Use the fully qualified resource name
-              name: gpu.intel.com/i915  
+            #gpus: 
+            #- deviceName: gpu.intel.com/i915  # Use the fully qualified resource name
+            #  name: gpu.intel.com/i915  
             disks:
             - disk:
                 bus: virtio
