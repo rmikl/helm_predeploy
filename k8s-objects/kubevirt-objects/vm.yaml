@@ -27,11 +27,9 @@
           resources:
             requests:
               memory: 3G
-              gpu.intel.com/i915: 1
+              #gpu.intel.com/i915: 1
             limits:
-              gpu.intel.com/i915: 1
-              #passwd: $6$CUD.VWR2w50TCty3$KYjjEuPjXxCLzPdD5U2OEAbSA5H4WOWfrswO1QkW/wcoaONDPFKnRuEBrjyAaWfztrSj8xAYYS0fnw4MHn3.a0
-              #passwd: "robert"
+              #gpu.intel.com/i915: 1
         volumes:
         - name: disk0
           persistentVolumeClaim:
