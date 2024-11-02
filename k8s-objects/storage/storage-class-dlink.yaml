@@ -63,10 +63,8 @@ mountOptions:
   - wsize=32768 
   - cache=loose 
   - nobrl
-  - dir_mode=0744
-  - file_mode=0744
   - uid=1001
-  - gid=1001 
+  - gid=1001
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
