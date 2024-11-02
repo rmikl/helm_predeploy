@@ -27,11 +27,11 @@ spec:
               value: "{{ .Values.env.USER }}"
             - name: RESOLUTION
               value: "{{ .Values.env.RESOLUTION }}"
-            - name: VNC_PASSWORD
+            - name: VNC_PW
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.existingSecret }}
-                  key: VNC_PASSWORD
+                  key: PASSWORD
             - name: HTTP_PASSWORD
               valueFrom:
                 secretKeyRef:
