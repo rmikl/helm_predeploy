@@ -47,9 +47,9 @@ spec:
           volumeMounts:
             - name: vnc-storage
               mountPath: /mnt/dlink
-            - name: vnc-home-storage  # New volume mount
-              mountPath: /home/rmikl
-              subPath: k8s-tools-config/vnc/home/rmikl
+          #  - name: vnc-home-storage  # New volume mount
+          #    mountPath: /home/rmikl
+          #    subPath: k8s-tools-config/vnc/home/rmikl
       volumes:
         - name: vnc-storage
           persistentVolumeClaim:
