@@ -87,6 +87,5 @@ mountOptions:
   - file_mode=0777
   - wsize=32768 
   - cache=loose 
-  - nobrl
   - uid=1000
   - gid=1000
