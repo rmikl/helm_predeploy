@@ -83,6 +83,8 @@ allowVolumeExpansion: false
 mountOptions: 
   - vers=2.0
   - rsize=32768 
+  - dir_mode=0777
+  - file_mode=0777
   - wsize=32768 
   - cache=loose 
   - nobrl
