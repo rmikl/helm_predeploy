@@ -49,7 +49,7 @@ metadata:
   name: dlink-home
 provisioner: smb.csi.k8s.io
 parameters:
-  source: "//192.168.1.22/smb"
+  source: "//192.168.1.22/smb/k8s-tools-config/vnc/home/rmikl"
   csi.storage.k8s.io/node-stage-secret-name: dlink-credentials
   csi.storage.k8s.io/node-stage-secret-namespace: cluster-operators
   csi.storage.k8s.io/node-publish-secret-name: dlink-credentials
