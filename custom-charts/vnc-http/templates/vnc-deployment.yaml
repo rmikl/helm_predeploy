@@ -36,8 +36,10 @@ spec:
           volumeMounts:
             - name: vnc-storage
               mountPath: /mnt/dlink
-            #- name: vnc-home-storage
-            #  mountPath: /home/rmikl
+            - name: vnc-home-storage
+              mountPath: /home/rmikl
+            - name: vnc-mozilla
+              mountPath: /headless/.mozilla
       volumes:
         - name: vnc-storage
           persistentVolumeClaim:
@@ -45,3 +47,6 @@ spec:
         - name: vnc-home-storage 
           persistentVolumeClaim:
             claimName: {{ include "vnc.fullname" . }}-home-pvc
+        - name: vnc-mozilla
+          persistentVolumeClaim:
+            claimName: {{ include "vnc.fullname" . }}-mozilla
