@@ -49,7 +49,7 @@ metadata:
   name: dlink-home
 provisioner: smb.csi.k8s.io
 parameters:
-  source: "//192.168.1.22/smb"
+  source: "//192.168.1.22/smb/k8s-tools-config/vnc/home/rmikl"
   csi.storage.k8s.io/node-stage-secret-name: dlink-credentials
   csi.storage.k8s.io/node-stage-secret-namespace: cluster-operators
   csi.storage.k8s.io/node-publish-secret-name: dlink-credentials
@@ -63,5 +63,29 @@ mountOptions:
   - wsize=32768 
   - cache=loose 
   - nobrl
-  - uid=1001
-  - gid=1001
+  - uid=1000
+  - gid=1000
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: dlink-mozilla
+provisioner: smb.csi.k8s.io
+parameters:
+  source: "//192.168.1.22/smb/k8s-tools-config/vnc/home/headless/.mozilla"
+  csi.storage.k8s.io/node-stage-secret-name: dlink-credentials
+  csi.storage.k8s.io/node-stage-secret-namespace: cluster-operators
+  csi.storage.k8s.io/node-publish-secret-name: dlink-credentials
+  csi.storage.k8s.io/node-publish-secret-namespace: cluster-operators
+reclaimPolicy: Retain
+volumeBindingMode: Immediate  
+allowVolumeExpansion: false
+mountOptions: 
+  - vers=2.0
+  - rsize=32768 
+  - dir_mode=0777
+  - file_mode=0777
+  - wsize=32768 
+  - cache=loose 
+  - uid=1000
+  - gid=1000

@@ -26,4 +26,19 @@ spec:
   resources:
     requests:
       storage: {{ .Values.persistence.size }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "vnc.fullname" . }}-mozilla
+  labels:
+{{ include "vnc.labels" . | indent 4 }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: dlink-mozilla
+  resources:
+    requests:
+      storage: {{ .Values.persistence.size }}
+---
 {{- end }}
