@@ -9,7 +9,5 @@ spec:
   selector:
 {{ include "vnc.selectorLabels" . | indent 4 }}
   ports:
-    - name: http
-      port: {{ .Values.service.httpPort }}
-      targetPort: 80
-      nodePort: {{ .Values.service.httpNodePort }}
+    - port: {{ .Values.service.httpPort }}
+      targetPort: 6901

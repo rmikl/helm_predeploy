@@ -20,28 +20,30 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
-              containerPort: 80
+          - containerPort: 5901
+          - containerPort: 6901
           env:
+            - name: VNC_COL_DEPTH
+              value: "24"
             - name: USER
               value: "{{ .Values.env.USER }}"
-            - name: RESOLUTION
+            - name: VNC_RESOLUTION
               value: "{{ .Values.env.RESOLUTION }}"
-            - name: VNC_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.existingSecret }}
-                  key: VNC_PASSWORD
-            - name: HTTP_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.existingSecret }}
-                  key: HTTP_PASSWORD
-            - name: PASSWORD
+            - name: VNC_PW
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.existingSecret }}
                   key: PASSWORD
+            #- name: HTTP_PASSWORD
+            #  valueFrom:
+            #    secretKeyRef:
+            #      name: {{ .Values.existingSecret }}
+            #      key: HTTP_PASSWORD
+            #- name: PASSWORD
+            #  valueFrom:
+            #    secretKeyRef:
+            #      name: {{ .Values.existingSecret }}
+            #      key: PASSWORD
           volumeMounts:
             - name: vnc-storage
               mountPath: /mnt/dlink
