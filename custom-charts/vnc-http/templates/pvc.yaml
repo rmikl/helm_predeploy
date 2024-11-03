@@ -37,8 +37,9 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: dlink-home
+  storageClassName: dlink-mozilla
   resources:
     requests:
       storage: {{ .Values.persistence.size }}
 {{- end }}
+---
