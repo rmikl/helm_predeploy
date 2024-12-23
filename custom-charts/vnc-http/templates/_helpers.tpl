@@ -44,4 +44,3 @@ app.kubernetes.io/version: {{ .Chart.AppVersion }}
 {{/*
 {{- end }}
 */}}
-

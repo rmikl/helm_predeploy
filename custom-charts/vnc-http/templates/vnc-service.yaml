@@ -10,4 +10,4 @@ spec:
 {{ include "vnc.selectorLabels" . | indent 4 }}
   ports:
     - port: {{ .Values.service.httpPort }}
-      targetPort: 6901
+      targetPort: 3000
