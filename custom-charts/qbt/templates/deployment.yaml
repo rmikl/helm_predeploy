@@ -17,6 +17,9 @@ spec:
       containers:
         - name: qbittorrent
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          resources:
+            limits:
+              memory: "4Gi"
           ports:
             - containerPort: {{ .Values.service.webuiPort }}
               name: webui-port
