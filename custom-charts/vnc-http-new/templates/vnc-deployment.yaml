@@ -41,17 +41,17 @@ spec:
               mountPath: /vnc-script
           resources:
             limits:
-              memory: "4000Mi"
-              cpu: "1000m"
-              gpu.intel.com/i915: 1
+              memory: "4Gi"
+              cpu: '2'
+              gpu.intel.com/i915: '1'
             requests:
-              memory: "1000Mi"
-              cpu: "1000m"
-            command:
-              - /bin/bash
-              - -c
-              - |
-                /vnc-script/init.sh
+              memory: "1Gi"
+              cpu: '1'
+          command:
+            - /bin/bash
+            - -c
+            - |
+              /vnc-script/init.sh
 
       volumes:
         - name: vnc-storage
