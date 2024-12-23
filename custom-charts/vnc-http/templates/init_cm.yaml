@@ -29,9 +29,4 @@ data:
     sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
     gsettings set org.gnome.desktop.session idle-delay 0
     gsettings set org.gnome.desktop.screensaver lock-enabled false
-    sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
-    sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
-    sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
-    chmod +x /usr/local/bin/kubectx
-    chmod +x /usr/local/bin/kubens
-    sudo apt install fzf vim -y
+    echo "alias k=kubectl" >> ~/.zshrc
