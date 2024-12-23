@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "vnc.fullname" . }}
+  labels:
+{{ include "vnc.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+{{ include "vnc.selectorLabels" . | indent 6 }}
+  template:
+    metadata:
+      labels:
+{{ include "vnc.labels" . | indent 8 }}
+    spec:
+      serviceAccountName: {{ .Values.vncServer.serviceAccount.name }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+          - containerPort: 3000
+          env:
+          - name: DRINODE
+            value: "/dev/dri/renderD128"
+          - name: CUSTOM_USER
+            value: "{{ .Values.env.USER }}"
+          - name: USER
+            value: "{{ .Values.env.USER }}"
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.existingSecret }}
+                key: PASSWORD
+              volumeMounts:
+                - name: vnc-storage
+                  mountPath: /mnt/dlink
+          volumeMounts:
+            - name: init-vnc
+              mountPath: /vnc-script
+          resources:
+            limits:
+              memory: "4000Mi"
+              cpu: "1000m"
+              gpu.intel.com/i915: 1
+            requests:
+              memory: "1000Mi"
+              cpu: "1000m"
+            command: ["/bin/sh", "-c"]
+            args:
+              - |
+                /vnc-script/init.sh
+      volumes:
+        - name: vnc-storage
+          persistentVolumeClaim:
+            claimName: {{ include "vnc.fullname" . }}-pvc
+        - name: init-vnc
+          configMap:
+            name: init-vnc
+            defaultMode: 0755
