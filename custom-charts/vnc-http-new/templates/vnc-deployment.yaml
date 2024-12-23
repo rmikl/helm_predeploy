@@ -52,6 +52,7 @@ spec:
             - -c
             - |
               /vnc-script/init.sh
+              /init
 
       volumes:
         - name: vnc-storage
