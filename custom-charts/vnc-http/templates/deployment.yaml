@@ -32,7 +32,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.existingSecret }}
-                key: PASSWORD
+                key: VNC_PASSWORD
           volumeMounts:
             - name: vnc-storage
               mountPath: /mnt/dlink
@@ -52,7 +52,6 @@ spec:
             - |
               /vnc-script/init.sh
               /init
-
       volumes:
         - name: vnc-storage
           persistentVolumeClaim:
