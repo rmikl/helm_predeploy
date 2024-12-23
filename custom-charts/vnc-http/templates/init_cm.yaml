@@ -27,3 +27,6 @@ data:
     chsh -s $(which zsh)
     sudo sed -i 's|/bin/bash|/usr/bin/zsh|g' /etc/passwd
     sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+    gsettings set org.gnome.desktop.session idle-delay 0
+    gsettings set org.gnome.desktop.screensaver lock-enabled false
+    echo "alias k=kubectl" >> ~/.zshrc
