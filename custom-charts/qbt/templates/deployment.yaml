@@ -28,6 +28,26 @@ spec:
             - containerPort: {{ .Values.service.torrentingPort }}
               protocol: UDP
               name: torrent-udp
+          command: 
+            - /bin/bash
+            - -c
+            - | 
+                apk add --no-cache openssl
+                # Input your new password here
+                password="password"
+                # Generate a random salt (16 bytes)
+                salt=$(openssl rand -base64 16)
+                # Number of iterations (adjust as needed for security)
+                iterations=100000
+                # Generate the PBKDF2 hash using openssl
+                derived_key=$(openssl enc -aes-256-cbc -k "$password" -P -md md5 -nosalt -iter $iterations -base64 <<< "$salt")
+                # Format the output
+                password_pbkdf2="@ByteArray(newSalt:newHash)"
+                echo "$password_pbkdf2"
+                sed -i.bak "s|WebUI\\Password_PBKDF2=\".*\"|WebUI\\Password_PBKDF2=\"$password_pbkdf2\"|" /config/qBittorrent/qBittorrent.conf
+                # Start qBittorrent
+                /init
+
           env:
             - name: PUID
               value: "{{ .Values.env.PUID }}"
