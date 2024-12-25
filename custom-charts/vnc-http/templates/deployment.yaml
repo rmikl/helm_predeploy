@@ -33,11 +33,11 @@ spec:
               secretKeyRef:
                 name: {{ .Values.existingSecret }}
                 key: VNC_PASSWORD
-          - name: GITHUB_TOKEN
+          - name: GITHUB_TOKEN_RAW
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.existingSecret }}
-                key: GITHUB_TOKEN
+                key: GITHUB_TOKEN_RAW
           - name: LOCAL_NODES_PWD
             valueFrom:
               secretKeyRef:
