@@ -33,6 +33,16 @@ spec:
               secretKeyRef:
                 name: {{ .Values.existingSecret }}
                 key: VNC_PASSWORD
+          - name: GITHUB_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.existingSecret }}
+                key: GITHUB_TOKEN
+          - name: LOCAL_NODES_PWD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.existingSecret }}
+                key: LOCAL_NODES_PWD
           volumeMounts:
             - name: vnc-storage
               mountPath: /mnt/dlink
@@ -40,12 +50,9 @@ spec:
               mountPath: /vnc-script
           resources:
             limits:
-              memory: "4Gi"
+              memory: "8Gi"
               cpu: '2'
               gpu.intel.com/i915: '1'
-            requests:
-              memory: "1Gi"
-              cpu: '1'
           command:
             - /bin/bash
             - -c
