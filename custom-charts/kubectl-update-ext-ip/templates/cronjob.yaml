@@ -9,6 +9,8 @@ spec:
     spec:
       template:
         spec:
+          nodeSelector:
+            beta.kubernetes.io/arch: amd64
           serviceAccountName: {{ .Values.serviceAccount.name }}
           containers:
             - name: kubectl
