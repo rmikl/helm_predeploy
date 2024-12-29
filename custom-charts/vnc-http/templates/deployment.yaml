@@ -50,8 +50,6 @@ spec:
               mountPath: /vnc-script
           resources:
             limits:
-              memory: "8Gi"
-              cpu: '2'
               gpu.intel.com/i915: '1'
           command:
             - /bin/bash
