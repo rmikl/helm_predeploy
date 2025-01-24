@@ -16,6 +16,8 @@ spec:
     kind: ClusterIssuer
   commonName: {{ .commonName }}
   dnsNames:
-    {{- toYaml .dnsNames | nindent 4 }}
+    {{- range .dnsNames }}
+    - {{ . | quote }}
+    {{- end }}
 ---
 {{- end }}
