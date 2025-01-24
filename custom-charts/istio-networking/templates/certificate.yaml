@@ -1,26 +1,3 @@
-#{{- if .Values.certificate.enabled }}
-#apiVersion: cert-manager.io/v1
-#kind: Certificate
-#metadata:
-#  name: {{ .Values.certificate.domain }}
-#  namespace: cluster-operators
-#spec:
-#  secretTemplate:
-#    annotations:
-#      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
-#      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: {{ .Values.certificate.namespacesToCopy | quote }}
-#      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
-#      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: {{ .Values.certificate.namespacesToCopy | quote }}
-#  secretName: {{ .Values.certificate.domain }}
-#  issuerRef:
-#    name: letsencrypt-prod
-#    kind: ClusterIssuer
-#  commonName: {{ printf "*.%s" .Values.certificate.domain | quote }}
-#  dnsNames:
-#    - {{ .Values.certificate.domain | quote }}
-#    - {{ printf "*.%s" .Values.certificate.domain | quote }}
-#{{- end }}
-
 {{- range .Values.domains }}
 apiVersion: cert-manager.io/v1
 kind: Certificate
