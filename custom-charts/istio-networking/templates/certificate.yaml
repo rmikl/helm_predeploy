@@ -15,6 +15,6 @@ spec:
     name: {{ .certificate.issuer }}
     kind: ClusterIssuer
   commonName: {{ .commonName }}
-  dnsNames: {{ toYaml .dnSNames | nindent 4 }}
+  dnsNames: {{ toYaml .dnsNames | nindent 4 }}
 ---
 {{- end }}
