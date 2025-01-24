@@ -5,8 +5,7 @@ metadata:
   name: {{ .name }}
   namespace: {{ .namespace }}
 spec:
-  hosts:
-    - {{ .host | quote }}
+  hosts: {{ toYaml .hosts | nindent 4 }}
   gateways:
     - {{ .gateway }}
   http:

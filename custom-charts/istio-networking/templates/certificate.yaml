@@ -15,6 +15,6 @@ spec:
   issuerRef:
     name: {{ .certificate.issuer }}
     kind: ClusterIssuer
-  dnsNames: {{ .hosts }}
+  dnsNames: {{ toYaml .hosts | nindent 4 }}
 ---
 {{- end }}
