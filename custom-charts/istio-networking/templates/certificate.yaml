@@ -14,8 +14,10 @@ spec:
   issuerRef:
     name: {{ .certificate.issuer }}
     kind: ClusterIssuer
-  commonName: {{ .commonName | quote }}  <!-- Add quoting here -->
+  commonName: {{ .commonName | quote }}
   dnsNames:
-    {{- toYaml .dnsNames | nindent 4 }}  <!-- Simplified syntax -->
+    {{- range .dnsNames }}
+    - {{ . | quote }}
+    {{- end }}
 ---
 {{- end }}
