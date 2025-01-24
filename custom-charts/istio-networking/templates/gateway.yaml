@@ -11,14 +11,16 @@ spec:
         number: 80
         name: http
         protocol: HTTP
-      hosts: {{ toYaml .hosts | nindent 8 }}
+      hosts: 
+      {{- toYaml .hosts | nindent 8 }}
       tls:
         httpsRedirect: true
     - port:
         number: 443
         name: https
         protocol: HTTPS
-      hosts: {{ toYaml .hosts | nindent 8 }}
+      hosts: 
+      {{- toYaml .hosts | nindent 8 }}
       tls:
         mode: SIMPLE
         credentialName: {{ .certificate.issuer }}-{{ .name }}
