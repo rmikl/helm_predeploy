@@ -2,6 +2,8 @@
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
   name: {{ .gatewayName }}
 spec:
   selector:
