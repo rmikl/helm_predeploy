@@ -5,6 +5,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
   name: {{ .gatewayName }}
+  namespace: {{ .Release.Namespace }}
 spec:
   selector:
     istio: ingress
@@ -26,5 +27,7 @@ spec:
       tls:
         mode: SIMPLE
         credentialName: {{ .certificate.issuer }}-{{ .name }}
+        minProtocolVersion: TLSV1_2
+        maxProtocolVersion: TLSV1_3
 ---
 {{- end }}
