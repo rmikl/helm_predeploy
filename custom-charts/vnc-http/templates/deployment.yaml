@@ -45,7 +45,7 @@ spec:
                 key: LOCAL_NODES_PWD
           volumeMounts:
             - name: vnc-storage
-              mountPath: /mnt/dlink
+              mountPath: /mnt/qnap
             - name: init-vnc
               mountPath: /vnc-script
           resources:

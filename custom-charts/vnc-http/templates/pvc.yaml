@@ -8,7 +8,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: dlink
+  storageClassName: qnap
   resources:
     requests:
       storage: {{ .Values.persistence.size }}
