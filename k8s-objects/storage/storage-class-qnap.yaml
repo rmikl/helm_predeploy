@@ -4,7 +4,7 @@ metadata:
   name: qnap
 provisioner: smb.csi.k8s.io
 parameters:
-  source: "//192.168.1.48/hdd1/smb"
+  source: "//192.168.1.48/smb"
   csi.storage.k8s.io/node-stage-secret-name: qnap-credentials
   csi.storage.k8s.io/node-stage-secret-namespace: cluster-operators
   csi.storage.k8s.io/node-publish-secret-name: qnap-credentials
