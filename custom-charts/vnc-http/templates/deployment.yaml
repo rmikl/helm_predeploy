@@ -47,6 +47,8 @@ spec:
               mountPath: /mnt/qnap
             - name: init-vnc
               mountPath: /vnc-script
+            - name: secret-volume  
+              mountPath: /config/.kube
           resources:
             limits:
               gpu.intel.com/i915: '1'
@@ -64,3 +66,9 @@ spec:
           configMap:
             name: init-vnc
             defaultMode: 0755
+        - name: secret-volume
+          secret:
+            secretName: vnc-credentials
+            items:
+            - key: KUBECONFIG
+              path: config
