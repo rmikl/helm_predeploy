@@ -10,16 +10,9 @@ service:
   httpPort: 80
   httpNodePort: 30081
 
-existingSecret: "vnc-credentials"
-
-vncServer:
-  serviceAccount:
-    name: vnc-admin
-
 env:
   USER: "rmikl"
   RESOLUTION: "1920x1080"
-
 
 persistence:
   enabled: true
